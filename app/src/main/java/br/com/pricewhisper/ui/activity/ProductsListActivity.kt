@@ -1,5 +1,6 @@
 package br.com.pricewhisper.ui.activity
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,6 +23,10 @@ class ProductsListActivity : AppCompatActivity() {
 
         val productsListRecycler: RecyclerView = findViewById(R.id.products_list_recycler)
         productsListRecycler.layoutManager = LinearLayoutManager(this)
-        productsListRecycler.adapter = ProductsListAdapter(this, productsList)
+        productsListRecycler.adapter = ProductsListAdapter(this, productsList) { position ->
+            val intent = Intent(this@ProductsListActivity, ProductDetailsActivity::class.java)
+            intent.putExtra("product", productsList[position])
+            startActivity(intent)
+        }
     }
 }
