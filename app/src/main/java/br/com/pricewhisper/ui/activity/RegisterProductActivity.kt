@@ -59,6 +59,7 @@ class RegisterProductActivity : AppCompatActivity() {
     private fun finishFormulary() {
         val filledProduct = toEntity()
         saveProductInFirebase(filledProduct)
+        goToProductDetails(filledProduct)
     }
 
     private fun toEntity(): Product {
@@ -107,5 +108,11 @@ class RegisterProductActivity : AppCompatActivity() {
 
         httpClient.newCall(request)
             .enqueue(response)
+    }
+
+    private fun goToProductDetails(filledProduct: Product) {
+        val intent = Intent(this@RegisterProductActivity, ProductsListActivity::class.java)
+        intent.putExtra("produto", filledProduct)
+        startActivity(intent)
     }
 }
