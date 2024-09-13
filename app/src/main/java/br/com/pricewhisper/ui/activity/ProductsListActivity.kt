@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import br.com.pricewhisper.R
 import br.com.pricewhisper.models.Product
 import br.com.pricewhisper.ui.recycler.adapter.ProductsListAdapter
+import br.com.pricewhisper.utils.RTDB_PRODUCTS_URL
+import br.com.pricewhisper.utils.httpClient
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -21,9 +23,7 @@ import java.io.IOException
 
 class ProductsListActivity : AppCompatActivity() {
 
-    private val httpClient = OkHttpClient()
     private val gson = Gson()
-    private val url = "https://pricewhisper-auth-cc2c8-default-rtdb.firebaseio.com/products.json"
     private val productsList: MutableList<Product> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,7 +47,7 @@ class ProductsListActivity : AppCompatActivity() {
         productsListRecycler.adapter = adapter
 
         val requestGetMethod = Request.Builder()
-            .url(url)
+            .url(RTDB_PRODUCTS_URL)
             .get()
             .build()
 
