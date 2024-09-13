@@ -9,4 +9,5 @@
     <string name="product_stock_hint">Estoque</string>
 
     <string name="fab_register_product_description">Botão que redireciona usuário para a tela de cadastro de produto</string>
+    <string name="menu_save_title">Salvar</string>
 </resources>
