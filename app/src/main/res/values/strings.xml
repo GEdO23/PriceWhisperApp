@@ -7,4 +7,6 @@
     <string name="product_price_hint">Preço</string>
     <string name="product_description_hint">Descrição</string>
     <string name="product_stock_hint">Estoque</string>
+
+    <string name="fab_register_product_description">Botão que redireciona usuário para a tela de cadastro de produto</string>
 </resources>

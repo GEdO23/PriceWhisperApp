@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import br.com.pricewhisper.R
 import br.com.pricewhisper.models.Product
 import br.com.pricewhisper.ui.recycler.adapter.ProductsListAdapter
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import okhttp3.Call
@@ -35,7 +36,7 @@ class ProductsListActivity : AppCompatActivity() {
             Product("Arroz 5kg", BigDecimal(47.95)),
             Product("Feijão 5kg", BigDecimal(42.00))
         )*/
-        
+
         val productsListRecycler: RecyclerView = findViewById(R.id.products_list_recycler)
         productsListRecycler.layoutManager = LinearLayoutManager(this)
         val adapter = ProductsListAdapter(this, productsList) { i ->
@@ -77,5 +78,14 @@ class ProductsListActivity : AppCompatActivity() {
 
         httpClient.newCall(requestGetMethod)
             .enqueue(responseGetMethod)
+
+        val fabRegisterProduct: FloatingActionButton =
+            findViewById(R.id.products_list_fab_register_product)
+
+        fabRegisterProduct.setOnClickListener {
+            val intent = Intent(this@ProductsListActivity, RegisterProductActivity::class.java)
+            startActivity(intent)
+        }
+
     }
 }
