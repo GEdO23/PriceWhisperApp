@@ -15,6 +15,9 @@
         android:theme="@style/Theme.PriceWhisper"
         tools:targetApi="31">
         <activity
+            android:name=".ui.activity.EditProductActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.activity.RegisterProductActivity"
             android:exported="false"
             android:parentActivityName=".ui.activity.ProductsListActivity" />
