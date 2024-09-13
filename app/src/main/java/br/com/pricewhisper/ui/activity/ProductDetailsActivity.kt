@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import br.com.pricewhisper.R
 import br.com.pricewhisper.models.Product
 import br.com.pricewhisper.utils.CurrencyUtil
+import br.com.pricewhisper.utils.PRODUCT_KEY
 
 class ProductDetailsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -13,7 +14,7 @@ class ProductDetailsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_product_details)
         setTitle("Detalhes")
 
-        val productClicked: Product = intent.getSerializableExtra("product") as Product
+        val productClicked: Product = intent.getSerializableExtra(PRODUCT_KEY) as Product
 
         val productName = findViewById<TextView>(R.id.product_details_name)
         val productPrice = findViewById<TextView>(R.id.product_details_price)

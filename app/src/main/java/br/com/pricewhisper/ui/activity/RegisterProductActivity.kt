@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import br.com.pricewhisper.R
 import br.com.pricewhisper.models.Product
+import br.com.pricewhisper.utils.PRODUCT_KEY
 import br.com.pricewhisper.utils.RTDB_PRODUCTS_URL
 import br.com.pricewhisper.utils.httpClient
 import okhttp3.Call
@@ -26,7 +27,6 @@ class RegisterProductActivity : AppCompatActivity() {
     private lateinit var edtProductPrice: EditText
     private lateinit var edtProductStock: EditText
     private lateinit var edtProductDescription: EditText
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -111,8 +111,8 @@ class RegisterProductActivity : AppCompatActivity() {
     }
 
     private fun goToProductDetails(filledProduct: Product) {
-        val intent = Intent(this@RegisterProductActivity, ProductsListActivity::class.java)
-        intent.putExtra("produto", filledProduct)
+        val intent = Intent(this@RegisterProductActivity, ProductDetailsActivity::class.java)
+        intent.putExtra(PRODUCT_KEY, filledProduct)
         startActivity(intent)
     }
 }

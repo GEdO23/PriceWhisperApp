@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import br.com.pricewhisper.R
 import br.com.pricewhisper.models.Product
 import br.com.pricewhisper.ui.recycler.adapter.ProductsListAdapter
+import br.com.pricewhisper.utils.PRODUCT_KEY
 import br.com.pricewhisper.utils.RTDB_PRODUCTS_URL
 import br.com.pricewhisper.utils.httpClient
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -16,10 +17,10 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import okhttp3.Call
 import okhttp3.Callback
-import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
 import java.io.IOException
+
 
 class ProductsListActivity : AppCompatActivity() {
 
@@ -41,7 +42,7 @@ class ProductsListActivity : AppCompatActivity() {
         productsListRecycler.layoutManager = LinearLayoutManager(this)
         val adapter = ProductsListAdapter(this, productsList) { i ->
             val intent = Intent(this@ProductsListActivity, ProductDetailsActivity::class.java)
-            intent.putExtra("product", productsList[i])
+            intent.putExtra(PRODUCT_KEY, productsList[i])
             startActivity(intent)
         }
         productsListRecycler.adapter = adapter
