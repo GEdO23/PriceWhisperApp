@@ -5,12 +5,13 @@
     android:layout_height="match_parent">
 
     <TextView
+        android:id="@+id/home_btn_products_list"
         android:layout_width="80dp"
         android:layout_height="wrap_content"
         android:layout_margin="64dp"
         android:drawablePadding="8dp"
         android:letterSpacing="0.04"
-        android:text="@string/product_list"
+        android:text="@string/products_list"
         android:textAlignment="center"
         app:drawableTopCompat="@drawable/btn_item_list"
         app:layout_constraintEnd_toEndOf="parent"
