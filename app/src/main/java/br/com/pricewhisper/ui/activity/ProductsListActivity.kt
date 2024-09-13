@@ -26,27 +26,28 @@ class ProductsListActivity : AppCompatActivity() {
 
     private val gson = Gson()
     private val productsList: MutableList<Product> = mutableListOf()
+    private lateinit var fabRegisterProduct: FloatingActionButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_products_list)
         setTitle("Lista de Produtos")
 
-        /* Hard coded ProductsList
-        val productsList: MutableList<Product> = arrayListOf(
-            Product("Arroz 5kg", BigDecimal(47.95)),
-            Product("Feijão 5kg", BigDecimal(42.00))
-        )*/
+        val adapter = ProductsListAdapter(this, productsList) { goToProductDetails(it) }
 
-        val productsListRecycler: RecyclerView = findViewById(R.id.products_list_recycler)
-        productsListRecycler.layoutManager = LinearLayoutManager(this)
-        val adapter = ProductsListAdapter(this, productsList) { i ->
-            val intent = Intent(this@ProductsListActivity, ProductDetailsActivity::class.java)
-            intent.putExtra(PRODUCT_KEY, productsList[i])
-            startActivity(intent)
+        configureRecyclerView(adapter)
+
+        loadFirebase(adapter)
+
+        fabRegisterProduct = findViewById(R.id.products_list_fab_register_product)
+
+        fabRegisterProduct.setOnClickListener {
+            goToRegisterProduct()
         }
-        productsListRecycler.adapter = adapter
 
+    }
+
+    private fun loadFirebase(adapter: ProductsListAdapter) {
         val requestGetMethod = Request.Builder()
             .url(RTDB_PRODUCTS_URL)
             .get()
@@ -79,14 +80,22 @@ class ProductsListActivity : AppCompatActivity() {
 
         httpClient.newCall(requestGetMethod)
             .enqueue(responseGetMethod)
+    }
 
-        val fabRegisterProduct: FloatingActionButton =
-            findViewById(R.id.products_list_fab_register_product)
+    private fun goToProductDetails(position: Int) {
+        val intent = Intent(this@ProductsListActivity, ProductDetailsActivity::class.java)
+        intent.putExtra(PRODUCT_KEY, productsList[position])
+        startActivity(intent)
+    }
 
-        fabRegisterProduct.setOnClickListener {
-            val intent = Intent(this@ProductsListActivity, RegisterProductActivity::class.java)
-            startActivity(intent)
-        }
+    private fun configureRecyclerView(adapter: ProductsListAdapter) {
+        val productsListRecycler: RecyclerView = findViewById(R.id.products_list_recycler)
+        productsListRecycler.layoutManager = LinearLayoutManager(this)
+        productsListRecycler.adapter = adapter
+    }
 
+    private fun goToRegisterProduct() {
+        val intent = Intent(this@ProductsListActivity, RegisterProductActivity::class.java)
+        startActivity(intent)
     }
 }
