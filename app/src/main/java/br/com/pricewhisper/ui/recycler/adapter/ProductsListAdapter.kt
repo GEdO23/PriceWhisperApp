@@ -10,7 +10,8 @@ import br.com.pricewhisper.ui.recycler.holder.ProductViewHolder
 
 class ProductsListAdapter(
     private val context: Context,
-    private val productsList: List<Product>
+    private val productsList: List<Product>,
+    private val onItemClickListener: (position: Int) -> Unit
 ) : RecyclerView.Adapter<ProductViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
@@ -24,6 +25,10 @@ class ProductsListAdapter(
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         val product: Product = productsList[position]
         holder.bind(product)
+
+        holder.itemView.setOnClickListener {
+            onItemClickListener(position)
+        }
     }
 
 }
