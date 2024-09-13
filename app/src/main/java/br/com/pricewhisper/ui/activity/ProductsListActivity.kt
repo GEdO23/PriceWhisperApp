@@ -1,12 +1,12 @@
-package com.example.pricewhisper.ui.activity
+package br.com.pricewhisper.ui.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.pricewhisper.R
-import com.example.pricewhisper.models.Product
-import com.example.pricewhisper.ui.recycler.adapter.ProductsListAdapter
+import br.com.pricewhisper.R
+import br.com.pricewhisper.models.Product
+import br.com.pricewhisper.ui.recycler.adapter.ProductsListAdapter
 import java.math.BigDecimal
 
 class ProductsListActivity : AppCompatActivity() {

@@ -1,4 +1,4 @@
-package com.example.pricewhisper.models
+package br.com.pricewhisper.models
 
 import java.math.BigDecimal
 

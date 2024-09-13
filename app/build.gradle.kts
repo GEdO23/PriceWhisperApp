@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.pricewhisper"
+    namespace = "br.com.pricewhisper"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.example.pricewhisper"
+        applicationId = "br.com.pricewhisper"
         minSdk = 24
         targetSdk = 34
         versionCode = 1

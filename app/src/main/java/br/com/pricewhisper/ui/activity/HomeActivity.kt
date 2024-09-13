@@ -1,10 +1,10 @@
-package com.example.pricewhisper.ui.activity
+package br.com.pricewhisper.ui.activity
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import com.example.pricewhisper.R
+import br.com.pricewhisper.R
 
 class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

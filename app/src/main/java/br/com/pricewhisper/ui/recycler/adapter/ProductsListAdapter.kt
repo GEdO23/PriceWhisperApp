@@ -1,13 +1,12 @@
-package com.example.pricewhisper.ui.recycler.adapter
+package br.com.pricewhisper.ui.recycler.adapter
 
-import android.app.Activity
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.pricewhisper.R
-import com.example.pricewhisper.models.Product
-import com.example.pricewhisper.ui.recycler.holder.ProductViewHolder
+import br.com.pricewhisper.R
+import br.com.pricewhisper.models.Product
+import br.com.pricewhisper.ui.recycler.holder.ProductViewHolder
 
 class ProductsListAdapter(
     private val context: Context,

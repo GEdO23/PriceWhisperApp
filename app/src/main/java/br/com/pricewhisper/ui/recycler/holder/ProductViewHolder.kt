@@ -1,12 +1,11 @@
-package com.example.pricewhisper.ui.recycler.holder
+package br.com.pricewhisper.ui.recycler.holder
 
 import android.icu.text.DecimalFormat
 import android.view.View
-import android.widget.EditText
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.pricewhisper.R
-import com.example.pricewhisper.models.Product
+import br.com.pricewhisper.R
+import br.com.pricewhisper.models.Product
 import java.util.Locale
 
 class ProductViewHolder(itemView: View) :
