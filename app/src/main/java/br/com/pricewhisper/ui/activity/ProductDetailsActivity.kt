@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import br.com.pricewhisper.R
 import br.com.pricewhisper.models.Product
 import br.com.pricewhisper.utils.CurrencyUtil
+import br.com.pricewhisper.utils.PRODUCT_ID_KEY
 import br.com.pricewhisper.utils.PRODUCT_KEY
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
@@ -24,19 +25,21 @@ class ProductDetailsActivity : AppCompatActivity() {
         setTitle("Detalhes")
 
         val productClicked: Product = intent.getSerializableExtra(PRODUCT_KEY) as Product
+        val productId: String = intent.getSerializableExtra(PRODUCT_ID_KEY) as String
 
         initializeFields()
 
         fillProductInfo(productClicked)
 
         fabEditProduct.setOnClickListener {
-            goToEditProduct(productClicked)
+            goToEditProduct(productClicked, productId)
         }
     }
 
-    private fun goToEditProduct(product: Product) {
+    private fun goToEditProduct(product: Product, productId: String) {
         val intent = Intent(this@ProductDetailsActivity, EditProductActivity::class.java)
         intent.putExtra(PRODUCT_KEY, product)
+        intent.putExtra(PRODUCT_ID_KEY, productId)
         startActivity(intent)
     }
 
