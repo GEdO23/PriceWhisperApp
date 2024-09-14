@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import br.com.pricewhisper.R
 import br.com.pricewhisper.models.Product
 import br.com.pricewhisper.ui.recycler.adapter.ProductsListAdapter
+import br.com.pricewhisper.utils.PRODUCT_ID_KEY
 import br.com.pricewhisper.utils.PRODUCT_KEY
 import br.com.pricewhisper.utils.RTDB_PRODUCTS_URL
 import br.com.pricewhisper.utils.httpClient
@@ -27,6 +28,7 @@ class ProductsListActivity : AppCompatActivity() {
     private val gson = Gson()
     private val productsList: MutableList<Product> = mutableListOf()
     private lateinit var fabRegisterProduct: FloatingActionButton
+    private lateinit var productsIds: List<String>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +51,7 @@ class ProductsListActivity : AppCompatActivity() {
 
     private fun loadFirebase(adapter: ProductsListAdapter) {
         val requestGetMethod = Request.Builder()
-            .url(RTDB_PRODUCTS_URL)
+            .url("$RTDB_PRODUCTS_URL.json")
             .get()
             .build()
 
@@ -66,6 +68,7 @@ class ProductsListActivity : AppCompatActivity() {
                 val productsMap: Map<String, Product> = gson.fromJson(productsJson, productsMapType)
 
                 val products = productsMap.values.toList()
+                productsIds = productsMap.keys.toList()
 
                 runOnUiThread {
                     products.forEach {
@@ -85,6 +88,7 @@ class ProductsListActivity : AppCompatActivity() {
     private fun goToProductDetails(position: Int) {
         val intent = Intent(this@ProductsListActivity, ProductDetailsActivity::class.java)
         intent.putExtra(PRODUCT_KEY, productsList[position])
+        intent.putExtra(PRODUCT_ID_KEY, productsIds[position])
         startActivity(intent)
     }
 

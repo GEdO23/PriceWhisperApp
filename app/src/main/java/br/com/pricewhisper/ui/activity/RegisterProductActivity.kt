@@ -82,7 +82,7 @@ class RegisterProductActivity : AppCompatActivity() {
         val body = productJson.toRequestBody(mediaType)
 
         val request = Request.Builder()
-            .url(RTDB_PRODUCTS_URL)
+            .url("$RTDB_PRODUCTS_URL.json")
             .post(body)
             .build()
 
