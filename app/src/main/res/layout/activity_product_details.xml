@@ -86,7 +86,7 @@
         android:layout_margin="16dp"
         android:backgroundTint="@color/secondary"
         android:contentDescription="@string/fab_edit_product_description"
-        android:src="@drawable/ic_edit"
+        android:src="@drawable/ic_pencil"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1"

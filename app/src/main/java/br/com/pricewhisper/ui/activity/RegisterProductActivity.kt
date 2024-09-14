@@ -36,7 +36,7 @@ class RegisterProductActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_save, menu)
+        menuInflater.inflate(R.menu.save_menu, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
