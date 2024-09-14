@@ -30,12 +30,13 @@ class ProductDetailsActivity : AppCompatActivity() {
         fillProductInfo(productClicked)
 
         fabEditProduct.setOnClickListener {
-            goToEditProduct()
+            goToEditProduct(productClicked)
         }
     }
 
-    private fun goToEditProduct() {
+    private fun goToEditProduct(product: Product) {
         val intent = Intent(this@ProductDetailsActivity, EditProductActivity::class.java)
+        intent.putExtra(PRODUCT_KEY, product)
         startActivity(intent)
     }
 
