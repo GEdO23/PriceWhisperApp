@@ -7,4 +7,5 @@ class CurrencyUtil {
     private val priceFormat = DecimalFormat.getCurrencyInstance(appLocale)
 
     fun format(price: BigDecimal): String = priceFormat.format(price)
+    fun format(price: String): BigDecimal = BigDecimal(priceFormat.parse(price).toString())
 }
