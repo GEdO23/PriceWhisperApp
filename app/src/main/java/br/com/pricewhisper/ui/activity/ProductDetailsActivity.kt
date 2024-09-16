@@ -9,6 +9,7 @@ import br.com.pricewhisper.models.Product
 import br.com.pricewhisper.utils.CurrencyUtil
 import br.com.pricewhisper.utils.PRODUCT_ID_KEY
 import br.com.pricewhisper.utils.PRODUCT_KEY
+import br.com.pricewhisper.utils.StockUtil
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class ProductDetailsActivity : AppCompatActivity() {
@@ -55,6 +56,6 @@ class ProductDetailsActivity : AppCompatActivity() {
         productName.text = product.name
         productPrice.text = CurrencyUtil().format(product.price)
         productDescription.text = product.description
-        productStock.text = product.stock.toString()
+        productStock.text = StockUtil().format(product.stock)
     }
 }
