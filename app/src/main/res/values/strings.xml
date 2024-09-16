@@ -11,4 +11,5 @@
     <string name="fab_register_product_description">Botão que redireciona usuário para a tela de cadastro de produto</string>
     <string name="menu_save_title">Salvar</string>
     <string name="fab_edit_product_description">Botão que redireciona usuário para a tela de edição de produto</string>
+    <string name="delete_product_text">Excluir produto</string>
 </resources>
