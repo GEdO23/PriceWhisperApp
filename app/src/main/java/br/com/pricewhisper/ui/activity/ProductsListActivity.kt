@@ -3,6 +3,7 @@ package br.com.pricewhisper.ui.activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -64,18 +65,29 @@ class ProductsListActivity : AppCompatActivity() {
                 val localBody = response.body
                 val productsJson = localBody?.string()
 
-                val productsMapType = object : TypeToken<Map<String, Product>>() {}.type
-                val productsMap: Map<String, Product> = gson.fromJson(productsJson, productsMapType)
+                if (productsJson != null && productsJson != "null") {
+                    val productsMapType = object : TypeToken<Map<String, Product?>?>() {}.type
+                    val productsMap: Map<String, Product> =
+                        gson.fromJson(productsJson, productsMapType)
 
-                val products = productsMap.values.toList()
-                productsIds = productsMap.keys.toList()
+                    val products = productsMap.values.toList()
+                    productsIds = productsMap.keys.toList()
 
-                runOnUiThread {
-                    products.forEach {
-                        productsList.add(it)
-                        Log.d("Produto", it.toJson())
+                    runOnUiThread {
+                        products.forEach {
+                            productsList.add(it)
+                            Log.d("Produto", gson.toJson(it))
+                        }
+                        adapter.notifyDataSetChanged()
                     }
-                    adapter.notifyDataSetChanged()
+                } else {
+                    runOnUiThread {
+                        Toast.makeText(
+                            this@ProductsListActivity,
+                            "Nenhum produto encontrado\nCadastre um produto para começar",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
                 }
             }
 
