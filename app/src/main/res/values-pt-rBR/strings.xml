@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="products_list">Lista de Produtos</string>
+    <string name="product_name_hint">Nome</string>
+    <string name="product_price_hint">Preço</string>
+    <string name="product_description_hint">Descrição</string>
+    <string name="product_stock_hint">Estoque</string>
+    <string name="fab_register_product_description">Botão que redireciona usuário para a tela de cadastro de produto</string>
+    <string name="menu_save_title">Salvar</string>
+    <string name="fab_edit_product_description">Botão que redireciona usuário para a tela de edição de produto</string>
+    <string name="delete_product_text">Excluir produto</string>
+</resources>
