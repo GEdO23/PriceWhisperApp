@@ -100,7 +100,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:backgroundTint="@color/secondary"
+        android:backgroundTint="@color/tertiary"
         android:contentDescription="@string/fab_edit_product_description"
         android:src="@drawable/ic_pencil"
         app:layout_constraintBottom_toBottomOf="parent"
