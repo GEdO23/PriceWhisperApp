@@ -131,6 +131,7 @@ class RegisterProductActivity : AppCompatActivity() {
                         Toast.LENGTH_LONG
                     ).show()
                     goToProductDetails(key)
+                    finish()
                 }
             }
 
