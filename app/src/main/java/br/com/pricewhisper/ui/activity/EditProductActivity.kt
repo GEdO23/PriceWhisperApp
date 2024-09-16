@@ -60,9 +60,14 @@ class EditProductActivity : AppCompatActivity() {
     }
 
     private fun finishFormulary() {
-        val filledProduct = toEntity()
-        editProductFromFirebase(filledProduct)
-        finish()
+        runOnUiThread {
+            validateFields()
+            if (!edtProductName.text.isNullOrBlank() && !edtProductPrice.text.isNullOrBlank()) {
+                val filledProduct = toEntity()
+                editProductFromFirebase(filledProduct)
+                finish()
+            }
+        }
     }
 
     private fun editProductFromFirebase(filledProduct: Product) {
@@ -97,6 +102,23 @@ class EditProductActivity : AppCompatActivity() {
 
         httpClient.newCall(request)
             .enqueue(response)
+    }
+
+    private fun validateFields() {
+        if (edtProductName.text.isNullOrBlank()) {
+            Toast.makeText(
+                this@EditProductActivity,
+                "O nome do produto deve ser informado", Toast.LENGTH_SHORT
+            ).show()
+        }
+        if (edtProductPrice.text.isNullOrBlank()) {
+            Toast.makeText(
+                this@EditProductActivity,
+                "O preço do produto deve ser informado", Toast.LENGTH_SHORT
+            ).show()
+        }
+        if (edtProductStock.text.isNullOrBlank()) edtProductStock.setText("1")
+        if (edtProductDescription.text.isNullOrBlank()) edtProductDescription.setText("")
     }
 
     private fun toEntity(): Product {

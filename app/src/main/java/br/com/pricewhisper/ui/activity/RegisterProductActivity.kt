@@ -59,9 +59,31 @@ class RegisterProductActivity : AppCompatActivity() {
     }
 
     private fun finishFormulary() {
-        val filledProduct = toEntity()
-        saveProductInFirebase(filledProduct)
-        goToProductDetails(filledProduct)
+        runOnUiThread {
+            validateFields()
+            if (!edtProductName.text.isNullOrBlank() && !edtProductPrice.text.isNullOrBlank()) {
+                val filledProduct = toEntity()
+                saveProductInFirebase(filledProduct)
+                goToProductDetails(filledProduct)
+            }
+        }
+    }
+
+    private fun validateFields() {
+        if (edtProductName.text.isNullOrBlank()) {
+            Toast.makeText(
+                this@RegisterProductActivity,
+                "O nome do produto deve ser informado", Toast.LENGTH_SHORT
+            ).show()
+        }
+        if (edtProductPrice.text.isNullOrBlank()) {
+            Toast.makeText(
+                this@RegisterProductActivity,
+                "O preço do produto deve ser informado", Toast.LENGTH_SHORT
+            ).show()
+        }
+        if (edtProductStock.text.isNullOrBlank()) edtProductStock.setText("1")
+        if (edtProductDescription.text.isNullOrBlank()) edtProductDescription.setText("")
     }
 
     private fun toEntity(): Product {
