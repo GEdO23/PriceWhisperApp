@@ -10,7 +10,7 @@ class HomeActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
-        setTitle("Home")
+        setTitle(getString(R.string.actionbar_home_title))
 
         val btnProductsList: TextView = findViewById(R.id.home_btn_products_list)
         btnProductsList.setOnClickListener {

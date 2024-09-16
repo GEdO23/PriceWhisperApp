@@ -9,4 +9,9 @@
     <string name="menu_save_title">Salvar</string>
     <string name="fab_edit_product_description">Botão que redireciona usuário para a tela de edição de produto</string>
     <string name="delete_product_text">Excluir produto</string>
+    <string name="actionbar_editproduct_title">Editar Produto</string>
+    <string name="actionbar_home_title">Home</string>
+    <string name="actionbar_productdetails_title">Detalhes</string>
+    <string name="actionbar_productslist_title">Lista de Produtos</string>
+    <string name="actionbar_registerproduct_title">Cadastro de Produto</string>
 </resources>

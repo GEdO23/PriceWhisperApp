@@ -38,7 +38,7 @@ class ProductsListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_products_list)
-        setTitle("Lista de Produtos")
+        setTitle(getString(R.string.actionbar_productslist_title))
 
         progressBar = findViewById(R.id.products_list_progressbar)
 

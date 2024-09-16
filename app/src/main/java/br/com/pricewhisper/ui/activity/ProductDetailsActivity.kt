@@ -38,7 +38,7 @@ class ProductDetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_product_details)
         initializeFields()
-        setTitle("Detalhes")
+        setTitle(getString(R.string.actionbar_productdetails_title))
     }
 
     override fun onResume() {

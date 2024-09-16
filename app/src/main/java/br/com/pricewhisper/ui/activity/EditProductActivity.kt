@@ -35,7 +35,7 @@ class EditProductActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_product)
-        setTitle("Editar Produto")
+        setTitle(getString(R.string.actionbar_editproduct_title))
 
         initializeFields()
 
