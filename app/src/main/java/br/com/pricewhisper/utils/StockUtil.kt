@@ -1,9 +1,12 @@
 package br.com.pricewhisper.utils
 
-class StockUtil {
+import android.content.Context
+import br.com.pricewhisper.R
+
+class StockUtil(private val context: Context) {
     fun format(stock: UInt): String =
-        "$stock em estoque"
+        "$stock ${context.getString(R.string.in_stock)}"
 
     fun format(stock: String): UInt =
-        stock.replace(" em estoque", "").toUInt()
+        stock.replace(" ${context.getString(R.string.in_stock)}", "").toUInt()
 }

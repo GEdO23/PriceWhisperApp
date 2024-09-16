@@ -19,4 +19,5 @@
     <string name="form_validation_product_price_mustnotbe_empty">O preço do produto não pode estar vazio</string>
     <string name="product_registered_message">Produto cadastrado</string>
     <string name="product_edited_message">Produto editado</string>
+    <string name="in_stock">em estoque</string>
 </resources>

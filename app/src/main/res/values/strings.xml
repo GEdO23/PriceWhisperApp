@@ -22,4 +22,5 @@
     <string name="form_validation_product_price_mustnotbe_empty">The product\'s price must not be empty</string>
     <string name="product_registered_message">Product registered</string>
     <string name="product_edited_message">Product edited</string>
+    <string name="in_stock">in stock</string>
 </resources>
