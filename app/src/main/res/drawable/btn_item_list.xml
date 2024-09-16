@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
-    <item>
+    <item android:width="50dp" android:height="50dp">
         <shape android:shape="oval">
             <solid android:color="@color/secondary" />
         </shape>
     </item>
     <item
-        android:bottom="6dp"
+        android:width="30dp"
+        android:height="30dp"
         android:drawable="@drawable/ic_list"
-        android:gravity="center"
-        android:left="6dp"
-        android:right="6dp"
-        android:top="6dp" />
+        android:gravity="center" />
 </layer-list>

@@ -6,11 +6,12 @@
 
     <TextView
         android:id="@+id/home_btn_products_list"
-        android:layout_width="80dp"
+        android:layout_width="120dp"
         android:layout_height="wrap_content"
         android:layout_margin="64dp"
-        android:drawablePadding="8dp"
+        android:drawablePadding="12dp"
         android:letterSpacing="0.04"
+        android:textSize="18sp"
         android:text="@string/products_list"
         android:textAlignment="center"
         app:drawableTopCompat="@drawable/btn_item_list"
