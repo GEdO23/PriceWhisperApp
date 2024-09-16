@@ -10,7 +10,7 @@
 | RM551988 | Gustavo Imparato Chaves     |
 
 ### Requisitos
-- [X] Construa um App com 5 telas (40 pontos);
-- [X] Crie chamadas as APIs que façam sentido ao teu projeto de App (20 pontos);
+- [ ] Construa um App com 5 telas (40 pontos);
+- [ ] Crie chamadas as APIs que façam sentido ao teu projeto de App (20 pontos);
 - [ ] Crie um diagrama de arquitetura (estrutura de pastas) do seu aplicativo (20 pontos);
 - [ ] Crie recursos atuais de navegabilidade e usabilidade (20 pontos).
