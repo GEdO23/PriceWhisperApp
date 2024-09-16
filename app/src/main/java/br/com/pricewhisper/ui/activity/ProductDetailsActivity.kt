@@ -38,7 +38,7 @@ class ProductDetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_product_details)
         initializeFields()
-        setTitle("Detalhes")
+        setTitle(getString(R.string.actionbar_productdetails_title))
     }
 
     override fun onResume() {
@@ -65,7 +65,7 @@ class ProductDetailsActivity : AppCompatActivity() {
 
         val response = object : Callback {
             override fun onFailure(call: Call, e: IOException) {
-                Log.e("GeminiAnswer", e.message.toString())
+                Log.e("GetById", e.message.toString())
             }
 
             override fun onResponse(call: Call, response: Response) {
@@ -138,14 +138,14 @@ class ProductDetailsActivity : AppCompatActivity() {
         productName.text = product.name
         productPrice.text = CurrencyUtil().format(product.price)
         productDescription.text = product.description
-        productStock.text = StockUtil().format(product.stock)
+        productStock.text = StockUtil(this@ProductDetailsActivity).format(product.stock)
     }
 
     private fun getProductInfo(): Product {
         return Product(
             name = productName.text.toString(),
             price = CurrencyUtil().format(productPrice.text.toString()),
-            stock = StockUtil().format(productStock.text.toString()),
+            stock = StockUtil(this@ProductDetailsActivity).format(productStock.text.toString()),
             description = productDescription.text.toString()
         )
     }

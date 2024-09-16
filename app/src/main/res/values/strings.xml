@@ -1,15 +1,26 @@
 <resources>
-    <string name="app_name">Price Whisper</string>
-    <string name="products_list">Lista de Produtos</string>
+    <string name="app_name" translatable="false">Price Whisper</string>
+    <string name="products_list">Products List</string>
 
     <!-- Product Info -->
-    <string name="product_name_hint">Nome</string>
-    <string name="product_price_hint">Preço</string>
-    <string name="product_description_hint">Descrição</string>
-    <string name="product_stock_hint">Estoque</string>
+    <string name="product_name_hint">Name</string>
+    <string name="product_price_hint">Price</string>
+    <string name="product_description_hint">Description</string>
+    <string name="product_stock_hint">Stock</string>
 
-    <string name="fab_register_product_description">Botão que redireciona usuário para a tela de cadastro de produto</string>
-    <string name="menu_save_title">Salvar</string>
-    <string name="fab_edit_product_description">Botão que redireciona usuário para a tela de edição de produto</string>
-    <string name="delete_product_text">Excluir produto</string>
+    <string name="fab_register_product_description">Button that redirects user to Register Product Screen</string>
+    <string name="menu_save_title">Save</string>
+    <string name="fab_edit_product_description">Button that redirects user to Edit Product Screen</string>
+    <string name="delete_product_text">Delete product</string>
+    <string name="actionbar_editproduct_title">Edit Product</string>
+    <string name="actionbar_home_title">Home</string>
+    <string name="actionbar_productdetails_title">Details</string>
+    <string name="actionbar_productslist_title">Products List</string>
+    <string name="actionbar_registerproduct_title">Register Product</string>
+    <string name="listproducts_notfound_message">No product found Register a product to start</string>
+    <string name="form_validation_product_name_mustnotbe_empty">The product\'s name must not be empty</string>
+    <string name="form_validation_product_price_mustnotbe_empty">The product\'s price must not be empty</string>
+    <string name="product_registered_message">Product registered</string>
+    <string name="product_edited_message">Product edited</string>
+    <string name="in_stock">in stock</string>
 </resources>

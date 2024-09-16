@@ -35,7 +35,7 @@ class EditProductActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_product)
-        setTitle("Editar Produto")
+        setTitle(getString(R.string.actionbar_editproduct_title))
 
         initializeFields()
 
@@ -92,7 +92,7 @@ class EditProductActivity : AppCompatActivity() {
                 runOnUiThread {
                     Toast.makeText(
                         this@EditProductActivity,
-                        "Produto editado",
+                        getString(R.string.product_edited_message),
                         Toast.LENGTH_LONG
                     ).show()
                 }
@@ -108,13 +108,15 @@ class EditProductActivity : AppCompatActivity() {
         if (edtProductName.text.isNullOrBlank()) {
             Toast.makeText(
                 this@EditProductActivity,
-                "O nome do produto deve ser informado", Toast.LENGTH_SHORT
+                getString(R.string.form_validation_product_name_mustnotbe_empty),
+                Toast.LENGTH_SHORT
             ).show()
         }
         if (edtProductPrice.text.isNullOrBlank()) {
             Toast.makeText(
                 this@EditProductActivity,
-                "O preço do produto deve ser informado", Toast.LENGTH_SHORT
+                getString(R.string.form_validation_product_price_mustnotbe_empty),
+                Toast.LENGTH_SHORT
             ).show()
         }
         if (edtProductStock.text.isNullOrBlank()) edtProductStock.setText("1")
