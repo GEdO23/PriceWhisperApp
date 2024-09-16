@@ -13,6 +13,7 @@ import br.com.pricewhisper.models.Product
 import br.com.pricewhisper.utils.PRODUCT_KEY
 import br.com.pricewhisper.utils.RTDB_PRODUCTS_URL
 import br.com.pricewhisper.utils.httpClient
+import com.google.gson.Gson
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -23,6 +24,7 @@ import java.io.IOException
 
 class RegisterProductActivity : AppCompatActivity() {
 
+    private val gson = Gson()
     private lateinit var edtProductName: EditText
     private lateinit var edtProductPrice: EditText
     private lateinit var edtProductStock: EditText
@@ -77,7 +79,7 @@ class RegisterProductActivity : AppCompatActivity() {
     }
 
     private fun saveProductInFirebase(product: Product) {
-        val productJson = product.toJson()
+        val productJson = gson.toJson(product)
         val mediaType = "application/json".toMediaTypeOrNull()
         val body = productJson.toRequestBody(mediaType)
 
@@ -93,7 +95,8 @@ class RegisterProductActivity : AppCompatActivity() {
 
             override fun onResponse(call: Call, response: Response) {
                 val localBody = response.body
-                Log.d("FirebaseProducts", localBody!!.string())
+                val productsJson = localBody?.string()
+                Log.d("FirebaseProducts", "" + productsJson)
 
                 runOnUiThread {
                     Toast.makeText(

@@ -8,13 +8,4 @@ data class Product(
     val price: BigDecimal,
     val stock: UInt = 1u,
     val description: String = ""
-): Serializable {
-    fun toJson() = """
-        {
-        "name": "$name",
-        "price": "$price",
-        "stock": "$stock",
-        "description": "$description"
-        }
-    """.trimIndent()
-}
+) : Serializable
