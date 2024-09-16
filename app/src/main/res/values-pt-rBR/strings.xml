@@ -14,4 +14,9 @@
     <string name="actionbar_productdetails_title">Detalhes</string>
     <string name="actionbar_productslist_title">Lista de Produtos</string>
     <string name="actionbar_registerproduct_title">Cadastro de Produto</string>
+    <string name="listproducts_notfound_message">Nenhum produto encontrado Cadastre um produto para começar</string>
+    <string name="form_validation_product_name_mustnotbe_empty">O nome do produto não pode estar vazio</string>
+    <string name="form_validation_product_price_mustnotbe_empty">O preço do produto não pode estar vazio</string>
+    <string name="product_registered_message">Produto cadastrado</string>
+    <string name="product_edited_message">Produto editado</string>
 </resources>

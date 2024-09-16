@@ -65,7 +65,7 @@ class ProductDetailsActivity : AppCompatActivity() {
 
         val response = object : Callback {
             override fun onFailure(call: Call, e: IOException) {
-                Log.e("GeminiAnswer", e.message.toString())
+                Log.e("GetById", e.message.toString())
             }
 
             override fun onResponse(call: Call, response: Response) {

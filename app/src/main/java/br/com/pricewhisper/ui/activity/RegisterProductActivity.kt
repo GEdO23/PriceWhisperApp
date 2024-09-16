@@ -73,13 +73,13 @@ class RegisterProductActivity : AppCompatActivity() {
         if (edtProductName.text.isNullOrBlank()) {
             Toast.makeText(
                 this@RegisterProductActivity,
-                "O nome do produto deve ser informado", Toast.LENGTH_SHORT
+                getString(R.string.form_validation_product_name_mustnotbe_empty), Toast.LENGTH_SHORT
             ).show()
         }
         if (edtProductPrice.text.isNullOrBlank()) {
             Toast.makeText(
                 this@RegisterProductActivity,
-                "O preço do produto deve ser informado", Toast.LENGTH_SHORT
+                getString(R.string.form_validation_product_price_mustnotbe_empty), Toast.LENGTH_SHORT
             ).show()
         }
         if (edtProductStock.text.isNullOrBlank()) edtProductStock.setText("1")
@@ -127,7 +127,7 @@ class RegisterProductActivity : AppCompatActivity() {
                 runOnUiThread {
                     Toast.makeText(
                         this@RegisterProductActivity,
-                        "Produto cadastrado",
+                        getString(R.string.product_registered_message),
                         Toast.LENGTH_LONG
                     ).show()
                     goToProductDetails(key)

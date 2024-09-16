@@ -87,7 +87,7 @@ class ProductsListActivity : AppCompatActivity() {
                     runOnUiThread {
                         products.forEach {
                             productsList.add(it)
-                            Log.d("Produto", gson.toJson(it))
+                            Log.d("Product", gson.toJson(it))
                         }
                         progressBar.visibility = View.GONE
                         adapter.notifyDataSetChanged()
@@ -96,7 +96,7 @@ class ProductsListActivity : AppCompatActivity() {
                     runOnUiThread {
                         Toast.makeText(
                             this@ProductsListActivity,
-                            "Nenhum produto encontrado\nCadastre um produto para começar",
+                            getString(R.string.listproducts_notfound_message),
                             Toast.LENGTH_LONG
                         ).show()
                         progressBar.visibility = View.GONE
