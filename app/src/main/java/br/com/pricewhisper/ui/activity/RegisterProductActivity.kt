@@ -10,10 +10,11 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import br.com.pricewhisper.R
 import br.com.pricewhisper.models.Product
-import br.com.pricewhisper.utils.PRODUCT_KEY
+import br.com.pricewhisper.utils.PRODUCT_ID_KEY
 import br.com.pricewhisper.utils.RTDB_PRODUCTS_URL
 import br.com.pricewhisper.utils.httpClient
 import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
@@ -64,7 +65,6 @@ class RegisterProductActivity : AppCompatActivity() {
             if (!edtProductName.text.isNullOrBlank() && !edtProductPrice.text.isNullOrBlank()) {
                 val filledProduct = toEntity()
                 saveProductInFirebase(filledProduct)
-                goToProductDetails(filledProduct)
             }
         }
     }
@@ -117,8 +117,12 @@ class RegisterProductActivity : AppCompatActivity() {
 
             override fun onResponse(call: Call, response: Response) {
                 val localBody = response.body
-                val productsJson = localBody?.string()
-                Log.d("FirebaseProducts", "" + productsJson)
+                val keyJson = localBody?.string()!!
+
+                val keyMapType = object : TypeToken<Map<String, String>>() {}.type
+                val keyMap: Map<String, String> = gson.fromJson(keyJson, keyMapType)
+                val key = keyMap["name"].toString()
+                Log.d("ProductKey", key)
 
                 runOnUiThread {
                     Toast.makeText(
@@ -126,6 +130,7 @@ class RegisterProductActivity : AppCompatActivity() {
                         "Produto cadastrado",
                         Toast.LENGTH_LONG
                     ).show()
+                    goToProductDetails(key)
                 }
             }
 
@@ -135,9 +140,9 @@ class RegisterProductActivity : AppCompatActivity() {
             .enqueue(response)
     }
 
-    private fun goToProductDetails(filledProduct: Product) {
+    private fun goToProductDetails(idProduct: String) {
         val intent = Intent(this@RegisterProductActivity, ProductDetailsActivity::class.java)
-        intent.putExtra(PRODUCT_KEY, filledProduct)
+        intent.putExtra(PRODUCT_ID_KEY, idProduct)
         startActivity(intent)
     }
 }

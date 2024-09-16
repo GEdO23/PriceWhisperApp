@@ -32,18 +32,17 @@ class ProductDetailsActivity : AppCompatActivity() {
     private lateinit var productStock: TextView
     private lateinit var fabEditProduct: FloatingActionButton
     private lateinit var deleteProduct: TextView
+    private lateinit var productId: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_product_details)
-        setTitle("Detalhes")
         initializeFields()
+        setTitle("Detalhes")
     }
 
     override fun onResume() {
         super.onResume()
-
-        val productId = intent.getSerializableExtra(PRODUCT_ID_KEY) as String
 
         getByIdInFirebase(productId)
 
@@ -93,6 +92,8 @@ class ProductDetailsActivity : AppCompatActivity() {
     }
 
     private fun initializeFields() {
+        productId = intent.getSerializableExtra(PRODUCT_ID_KEY) as String
+
         productName = findViewById(R.id.product_details_name)
         productPrice = findViewById(R.id.product_details_price)
         productDescription = findViewById(R.id.product_details_description)
