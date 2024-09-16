@@ -3,6 +3,8 @@ package br.com.pricewhisper.ui.activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -31,10 +33,14 @@ class ProductsListActivity : AppCompatActivity() {
     private lateinit var productsIds: List<String>
     private lateinit var adapter: ProductsListAdapter
 
+    private lateinit var progressBar: ProgressBar
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_products_list)
         setTitle("Lista de Produtos")
+
+        progressBar = findViewById(R.id.products_list_progressbar)
 
         configureRecyclerView()
 
@@ -48,6 +54,7 @@ class ProductsListActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        progressBar.visibility = View.VISIBLE
         loadFirebase()
     }
 
@@ -62,6 +69,7 @@ class ProductsListActivity : AppCompatActivity() {
         val responseGetMethod = object : Callback {
             override fun onFailure(call: Call, e: IOException) {
                 Log.e("LoadFirebase", e.message.toString())
+                progressBar.visibility = View.GONE
             }
 
             override fun onResponse(call: Call, response: Response) {
@@ -81,6 +89,7 @@ class ProductsListActivity : AppCompatActivity() {
                             productsList.add(it)
                             Log.d("Produto", gson.toJson(it))
                         }
+                        progressBar.visibility = View.GONE
                         adapter.notifyDataSetChanged()
                     }
                 } else {
@@ -90,6 +99,7 @@ class ProductsListActivity : AppCompatActivity() {
                             "Nenhum produto encontrado\nCadastre um produto para começar",
                             Toast.LENGTH_LONG
                         ).show()
+                        progressBar.visibility = View.GONE
                         adapter.notifyDataSetChanged()
                     }
                 }
