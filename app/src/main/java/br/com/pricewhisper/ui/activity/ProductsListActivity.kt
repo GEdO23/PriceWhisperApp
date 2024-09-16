@@ -52,6 +52,8 @@ class ProductsListActivity : AppCompatActivity() {
     }
 
     private fun loadFirebase() {
+        productsList.clear()
+
         val requestGetMethod = Request.Builder()
             .url("$RTDB_PRODUCTS_URL.json")
             .get()
@@ -88,7 +90,6 @@ class ProductsListActivity : AppCompatActivity() {
                             "Nenhum produto encontrado\nCadastre um produto para começar",
                             Toast.LENGTH_LONG
                         ).show()
-                        productsList.clear()
                         adapter.notifyDataSetChanged()
                     }
                 }
