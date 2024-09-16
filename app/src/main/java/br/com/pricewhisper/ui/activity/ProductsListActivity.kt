@@ -28,29 +28,30 @@ class ProductsListActivity : AppCompatActivity() {
 
     private val gson = Gson()
     private val productsList: MutableList<Product> = mutableListOf()
-    private lateinit var fabRegisterProduct: FloatingActionButton
     private lateinit var productsIds: List<String>
+    private lateinit var adapter: ProductsListAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_products_list)
         setTitle("Lista de Produtos")
 
-        val adapter = ProductsListAdapter(this, productsList) { goToProductDetails(it) }
+        configureRecyclerView()
 
-        configureRecyclerView(adapter)
-
-        loadFirebase(adapter)
-
-        fabRegisterProduct = findViewById(R.id.products_list_fab_register_product)
+        val fabRegisterProduct: FloatingActionButton =
+            findViewById(R.id.products_list_fab_register_product)
 
         fabRegisterProduct.setOnClickListener {
             goToRegisterProduct()
         }
-
     }
 
-    private fun loadFirebase(adapter: ProductsListAdapter) {
+    override fun onResume() {
+        super.onResume()
+        loadFirebase()
+    }
+
+    private fun loadFirebase() {
         val requestGetMethod = Request.Builder()
             .url("$RTDB_PRODUCTS_URL.json")
             .get()
@@ -104,9 +105,10 @@ class ProductsListActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    private fun configureRecyclerView(adapter: ProductsListAdapter) {
+    private fun configureRecyclerView() {
         val productsListRecycler: RecyclerView = findViewById(R.id.products_list_recycler)
         productsListRecycler.layoutManager = LinearLayoutManager(this)
+        adapter = ProductsListAdapter(this, productsList) { goToProductDetails(it) }
         productsListRecycler.adapter = adapter
     }
 
