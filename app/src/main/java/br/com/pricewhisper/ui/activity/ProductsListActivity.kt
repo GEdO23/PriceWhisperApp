@@ -88,6 +88,8 @@ class ProductsListActivity : AppCompatActivity() {
                             "Nenhum produto encontrado\nCadastre um produto para começar",
                             Toast.LENGTH_LONG
                         ).show()
+                        productsList.clear()
+                        adapter.notifyDataSetChanged()
                     }
                 }
             }
