@@ -11,21 +11,31 @@
 
 ## Descrição do Projeto
 
-O Price Whisper Mobile App é um componente essencial da solução Price Whisper, que visa otimizar a precificação no setor varejista utilizando Machine Learning. Este aplicativo móvel, desenvolvido em Kotlin, permite a visualização e o gerenciamento de produtos e preços diretamente do dispositivo móvel, integrando-se com várias APIs e serviços backend para fornecer uma experiência completa e eficiente.
+O **Price Whisper Mobile App** faz parte da solução **Price Whisper**, voltada para otimizar a precificação de produtos no setor varejista, utilizando machine learning. Desenvolvido em **Kotlin**, este aplicativo móvel oferece uma interface intuitiva para que gestores possam gerenciar produtos, visualizar insights estratégicos de preços e tomar decisões mais informadas diretamente de seus dispositivos móveis.
+
+O app se integra com APIs e outros sistemas backend, como Firebase e serviços Java/.NET, garantindo a sincronização contínua de dados em tempo real e proporcionando uma experiência completa e eficiente para o usuário final.
+
+## Problema e Solução
+
+No setor varejista, precificar produtos de forma eficiente é essencial para garantir a competitividade e a lucratividade. O **Price Whisper** visa resolver o problema da precificação subótima por meio de análises dinâmicas e dados em tempo real, utilizando machine learning para gerar recomendações de preços.
+
+O aplicativo móvel é uma peça fundamental dessa solução, permitindo que os gestores acessem essas informações e façam ajustes em qualquer lugar, integrando-se perfeitamente ao ecossistema do **Price Whisper**.
 
 ## Funcionalidades Principais
 
-- **Visualização de Produtos**: Permite aos usuários visualizar a lista de produtos disponíveis.
-- **Gerenciamento de Preços**: Facilita a atualização e o gerenciamento de preços dos produtos.
-- **Integração com APIs**: Conecta-se a APIs para buscar e enviar dados relacionados aos produtos e preços.
-- **Suporte Multilíngue**: Suporte para diferentes locais e idiomas, como Português do Brasil.
+1. **Visualização de Produtos**: Exibe a lista de produtos disponíveis, com informações detalhadas.
+2. **Gerenciamento de Preços**: Permite a atualização e controle de preços de forma rápida e intuitiva.
+3. **Exibição de Insights e Dados Dinâmicos**: Apresenta análises e sugestões de ajuste de preços baseadas em machine learning. (futuro)
+4. **Autenticação de Usuários**: Utiliza Firebase para login e registro de usuários. (futuro)
+5. **Integração com APIs**: Se comunica com APIs REST para sincronização de dados e backend. (futuro)
+6. **Suporte Multilíngue**: Possui suporte para diferentes localidades e idiomas, incluindo português (Brasil).
 
 ## Arquitetura do Projeto
 
 O app Kotlin segue uma arquitetura modular e organizada em pacotes, facilitando a manutenção e escalabilidade. A estrutura principal inclui:
 
-- **Pacote `utils`**: Contém utilitários como `CurrencyUtil` e `StockUtil` para formatação de preços e estoque.
-- **Pacote `ui`**: Contém as atividades e fragmentos que compõem a interface do usuário.
+- **Pacote `utils`**: Funções utilitárias, como formatação de preços e controle de estoque.
+- **Pacote `ui`**: Contém as atividades responsáveis pela interface com o usuário.
 
 ## Configurações Necessárias
 
@@ -48,11 +58,11 @@ Para configurar o ambiente e rodar o projeto localmente, siga os passos abaixo:
 
 ## APIs Utilizadas
 
-- **Firebase Realtime Database**: Utilizado para armazenar e buscar dados de produtos.
+- **Firebase Realtime Database**: Usado para armazenar e buscar dados de produtos.
     - URL: `https://pricewhisper-auth-cc2c8-default-rtdb.firebaseio.com/products`
-- **Backend Java**: Microsserviço para gerenciamento de produtos (futuro).
-- **Backend .NET**: Microsserviço para gestão de usuários (futuro).
-- **Algoritmo de Machine Learning**: Implementado via Flask para análise e recomendação de preços (futuro).
+- **Backend Java**: Para gerenciamento de produtos (futuro).
+- **Backend .NET**: Para gerenciamento de usuários (futuro).
+- **Algoritmo de Machine Learning**: Integração futura via Flask para recomendação e otimização de preços
 
 ## Instruções de Deploy
 
@@ -70,13 +80,15 @@ As principais dependências do projeto estão listadas no arquivo `build.gradle`
 
 ```gradle
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.5.21"
-    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
-    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
-    implementation 'com.google.firebase:firebase-database:20.0.3'
-    implementation 'androidx.core:core-ktx:1.6.0'
-    implementation 'androidx.appcompat:appcompat:1.3.1'
-    implementation 'com.google.android.material:material:1.4.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.0'
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.material)
+    implementation(libs.androidx.activity)
+    implementation(libs.androidx.constraintlayout)
+    implementation(libs.okhttp)
+    implementation(libs.gson)
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
 }
 ```
