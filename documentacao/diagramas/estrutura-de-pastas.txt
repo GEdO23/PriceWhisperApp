@@ -1,0 +1,53 @@
+pricewhisper/
+└── app/
+    ├── src/
+    │   └── main/
+    │       ├── java/
+    │       │   └── br/
+    │       │       └── com/
+    │       │           └── pricewhisper/
+    │       │               ├── models/
+    │       │               │   └── Product.kt
+    │       │               ├── ui/
+    │       │               │   ├── activity/
+    │       │               │   │   ├── EditProductActivity.kt
+    │       │               │   │   ├── HomeActivity.kt
+    │       │               │   │   ├── ProductDetailsActivity.kt
+    │       │               │   │   ├── ProductsListActivity.kt
+    │       │               │   │   └── RegisterProductActivity.kt
+    │       │               │   └── recycler/
+    │       │               │       └── adapter/
+    │       │               │           └── ProductsListAdapter.kt
+    │       │               │       └── holder/
+    │       │               │           └── ProductViewHolder.kt
+    │       │               └── utils/
+    │       │                   ├── Constants.kt
+    │       │                   ├── CurrencyUtil.kt
+    │       │                   └── StockUtil.kt
+    │       ├── res/
+    │       │   ├── drawable/
+    │       │   │   ├── btn_item_list.xml
+    │       │   │   ├── ic_floppy_disk.xml
+    │       │   │   ├── ic_launcher_foreground.xml
+    │       │   │   ├── ic_list.xml
+    │       │   │   ├── ic_omcorp_logo.xml
+    │       │   │   ├── ic_pencil.xml
+    │       │   │   └── ic_plus.xml
+    │       │   ├── layout/
+    │       │   │   ├── activity_edit_product.xml
+    │       │   │   ├── activity_home.xml
+    │       │   │   ├── activity_product_details.xml
+    │       │   │   ├── activity_products_list.xml
+    │       │   │   ├── activity_register_product.xml
+    │       │   │   └── item_product.xml
+    │       │   └── menu/
+    │       │       └── save_menu.xml
+    │       │   └── values/
+    │       │       ├── colors.xml
+    │       │       ├── strings.xml
+    │       │       └── themes.xml
+    │       │   └── values-pt-rBR/
+    │       │       └── strings.xml
+    │       └── AndroidManifest.xml
+    ├── .gitignore
+    └── build.gradle
