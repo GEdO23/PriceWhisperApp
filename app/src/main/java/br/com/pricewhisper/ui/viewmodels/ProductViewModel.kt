@@ -12,4 +12,8 @@ class ProductViewModel {
     fun save(product: Product) {
         repo.saveInFirebase(product)
     }
+
+    fun getAll() {
+        repo.loadFirebase(productList)
+    }
 }
