@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.sp
 import br.com.pricewhisper.models.Product
 import br.com.pricewhisper.ui.viewmodels.ProductViewModel
 import br.com.pricewhisper.ui.theme.PriceWhisperTheme
+import java.math.BigDecimal
 
 @Composable
 fun ProductFormScreen(modifier: Modifier = Modifier) {
@@ -60,14 +61,13 @@ fun ProductFormScreen(modifier: Modifier = Modifier) {
             )
         }
         Button(onClick = {
-            viewModel.saveInFirebase(
-                product = Product(
-                    name = name.value,
-                    price = price.value.toBigDecimal(),
-                    stock = stock.value.toIntOrNull()?.toUInt() ?: 1u,
-                    description = description.value
-                )
+            val product = Product(
+                name = name.value,
+                price = price.value.toBigDecimalOrNull() ?: BigDecimal("0.0"),
+                stock = stock.value.toIntOrNull()?.toUInt() ?: 1u,
+                description = description.value
             )
+            viewModel.save(product = product)
         }) { Text("Submit") }
     }
 }

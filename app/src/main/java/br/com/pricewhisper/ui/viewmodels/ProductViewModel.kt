@@ -1,44 +1,15 @@
 package br.com.pricewhisper.ui.viewmodels
 
-import android.util.Log
+import androidx.compose.runtime.mutableStateListOf
 import br.com.pricewhisper.models.Product
-import com.google.gson.Gson
-import okhttp3.Call
-import okhttp3.Callback
-import okhttp3.MediaType.Companion.toMediaType
-import okhttp3.OkHttpClient
-import okhttp3.Request
-import okhttp3.RequestBody.Companion.toRequestBody
-import okhttp3.Response
-import java.io.IOException
+import br.com.pricewhisper.repository.ProductRepository
 
 class ProductViewModel {
-    private val httpClient = OkHttpClient()
-    private val gson = Gson()
+    private val repo = ProductRepository()
 
-    private val url: String =
-        "https://omcorp-pricewhisper-default-rtdb.firebaseio.com/products/"
+    val productList = mutableStateListOf<Product>()
 
-    fun saveInFirebase(product: Product) {
-        val json = gson.toJson(product)
-        val body = json.toRequestBody("application/json".toMediaType())
-
-        val request = Request.Builder()
-            .url("$url.json")
-            .post(body)
-            .build()
-
-        val response = object : Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                Log.e("PRICE_WHISPER", e.message.toString())
-            }
-
-            override fun onResponse(call: Call, response: Response) {
-                Log.i("PRICE_WHISPER", response.message)
-            }
-        }
-
-        httpClient.newCall(request)
-            .enqueue(response)
+    fun save(product: Product) {
+        repo.saveInFirebase(product)
     }
 }
