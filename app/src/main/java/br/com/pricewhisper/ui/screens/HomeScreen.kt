@@ -4,7 +4,6 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -15,17 +14,21 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import br.com.pricewhisper.ui.theme.PriceWhisperTheme
+import androidx.navigation.NavHostController
+import br.com.pricewhisper.productListDestination
 
 @Composable
-fun HomeScreen(modifier: Modifier = Modifier) {
+fun HomeScreen(
+    navController: NavHostController,
+    modifier: Modifier = Modifier
+) {
     Column(
         verticalArrangement = Arrangement.spacedBy(32.dp),
         modifier = modifier
     ) {
         ButtonGroup(
+            navController = navController,
             modifier = Modifier
                 .border(2.dp, Color.Gray, RoundedCornerShape(24.dp))
                 .padding(32.dp)
@@ -34,7 +37,10 @@ fun HomeScreen(modifier: Modifier = Modifier) {
 }
 
 @Composable
-private fun ButtonGroup(modifier: Modifier = Modifier) {
+private fun ButtonGroup(
+    navController: NavHostController,
+    modifier: Modifier = Modifier
+) {
     Row(
         horizontalArrangement = Arrangement.Center,
         modifier = modifier
@@ -42,7 +48,7 @@ private fun ButtonGroup(modifier: Modifier = Modifier) {
         ActionButton(
             label = "Products",
             modifier = Modifier.widthIn(min = 100.dp, max = 100.dp)
-        ) {}
+        ) { navController.navigate(productListDestination.route) }
         ActionButton(
             label = "Profile",
             modifier = Modifier.widthIn(min = 100.dp, max = 100.dp)
@@ -72,15 +78,16 @@ private fun ActionButton(
         )
     }
 }
-
-@Preview(showSystemUi = true)
-@Composable
-private fun HomePreview() {
-    PriceWhisperTheme {
-        HomeScreen(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp)
-        )
-    }
-}
+//
+//@Preview(showSystemUi = true)
+//@Composable
+//private fun HomePreview() {
+//    PriceWhisperTheme {
+//        HomeScreen(
+//            modifier = Modifier
+//                .fillMaxSize()
+//                .padding(16.dp),
+//            navController = navController
+//        )
+//    }
+//}

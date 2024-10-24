@@ -2,8 +2,6 @@ package br.com.pricewhisper.ui.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
@@ -13,16 +11,18 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import br.com.pricewhisper.models.Product
 import br.com.pricewhisper.ui.viewmodels.ProductViewModel
-import br.com.pricewhisper.ui.theme.PriceWhisperTheme
 import java.math.BigDecimal
 
 @Composable
-fun ProductFormScreen(modifier: Modifier = Modifier) {
+fun ProductFormScreen(
+    navController: NavHostController,
+    modifier: Modifier = Modifier
+) {
     val viewModel = ProductViewModel()
 
     val name = remember { mutableStateOf("") }
@@ -71,15 +71,16 @@ fun ProductFormScreen(modifier: Modifier = Modifier) {
         }) { Text("Submit") }
     }
 }
-
-@Preview(showSystemUi = true)
-@Composable
-private fun ProductFormPreview() {
-    PriceWhisperTheme {
-        ProductFormScreen(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp)
-        )
-    }
-}
+//
+//@Preview(showSystemUi = true)
+//@Composable
+//private fun ProductFormPreview() {
+//    PriceWhisperTheme {
+//        ProductFormScreen(
+//            modifier = Modifier
+//                .fillMaxSize()
+//                .padding(16.dp),
+//            navController = navController
+//        )
+//    }
+//}
