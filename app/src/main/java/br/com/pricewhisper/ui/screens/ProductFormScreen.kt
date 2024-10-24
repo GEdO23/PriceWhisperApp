@@ -15,6 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import br.com.pricewhisper.models.Product
+import br.com.pricewhisper.productListDestination
 import br.com.pricewhisper.ui.viewmodels.ProductViewModel
 import java.math.BigDecimal
 
@@ -68,6 +69,7 @@ fun ProductFormScreen(
                 description = description.value
             )
             viewModel.save(product = product)
+            navController.navigate(productListDestination.route)
         }) { Text("Submit") }
     }
 }
