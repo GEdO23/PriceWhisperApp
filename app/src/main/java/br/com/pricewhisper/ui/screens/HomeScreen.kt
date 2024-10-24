@@ -1,4 +1,4 @@
-package br.com.pricewhisper.ui
+package br.com.pricewhisper.ui.screens
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement

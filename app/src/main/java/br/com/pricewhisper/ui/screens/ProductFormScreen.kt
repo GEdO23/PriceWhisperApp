@@ -1,4 +1,4 @@
-package br.com.pricewhisper.ui
+package br.com.pricewhisper.ui.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -17,6 +17,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.pricewhisper.models.Product
+import br.com.pricewhisper.ui.viewmodels.ProductViewModel
 import br.com.pricewhisper.ui.theme.PriceWhisperTheme
 
 @Composable
