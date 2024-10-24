@@ -1,4 +1,4 @@
-package br.com.pricewhisper.ui
+package br.com.pricewhisper.ui.viewmodels
 
 import android.util.Log
 import br.com.pricewhisper.models.Product
