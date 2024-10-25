@@ -4,23 +4,27 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.FilledIconButton
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
-import br.com.pricewhisper.productListDestination
+import br.com.pricewhisper.ui.theme.PriceWhisperTheme
 
 @Composable
 fun HomeScreen(
-    navController: NavHostController,
+    onClickProductsActionButton: () -> Unit,
+    onClickProfileActionButton: () -> Unit,
+    onClickSettingsActionButton: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -28,18 +32,22 @@ fun HomeScreen(
         modifier = modifier
     ) {
         ButtonGroup(
-            navController = navController,
+            onClickProductsActionButton = onClickProductsActionButton,
+            onClickProfileActionButton = onClickProfileActionButton,
+            onClickSettingsActionButton = onClickSettingsActionButton,
             modifier = Modifier
                 .border(2.dp, Color.Gray, RoundedCornerShape(24.dp))
-                .padding(32.dp)
+                .padding(32.dp),
         )
     }
 }
 
 @Composable
 private fun ButtonGroup(
-    navController: NavHostController,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    onClickProductsActionButton: () -> Unit,
+    onClickProfileActionButton: () -> Unit,
+    onClickSettingsActionButton: () -> Unit,
 ) {
     Row(
         horizontalArrangement = Arrangement.Center,
@@ -48,15 +56,15 @@ private fun ButtonGroup(
         ActionButton(
             label = "Products",
             modifier = Modifier.widthIn(min = 100.dp, max = 100.dp)
-        ) { navController.navigate(productListDestination.route) }
+        ) { onClickProductsActionButton() }
         ActionButton(
             label = "Profile",
             modifier = Modifier.widthIn(min = 100.dp, max = 100.dp)
-        ) {}
+        ) { onClickProfileActionButton() }
         ActionButton(
             label = "Settings",
             modifier = Modifier.widthIn(min = 100.dp, max = 100.dp)
-        ) {}
+        ) { onClickSettingsActionButton() }
     }
 }
 
@@ -78,16 +86,21 @@ private fun ActionButton(
         )
     }
 }
-//
-//@Preview(showSystemUi = true)
-//@Composable
-//private fun HomePreview() {
-//    PriceWhisperTheme {
-//        HomeScreen(
-//            modifier = Modifier
-//                .fillMaxSize()
-//                .padding(16.dp),
-//            navController = navController
-//        )
-//    }
-//}
+
+@Preview(showSystemUi = true)
+@Composable
+private fun HomePreview() {
+    PriceWhisperTheme {
+        Surface(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp)
+        ) {
+            HomeScreen(
+                onClickProductsActionButton = {},
+                onClickProfileActionButton = {},
+                onClickSettingsActionButton = {}
+            )
+        }
+    }
+}
