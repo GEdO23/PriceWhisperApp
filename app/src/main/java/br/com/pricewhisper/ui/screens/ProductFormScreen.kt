@@ -2,40 +2,35 @@ package br.com.pricewhisper.ui.screens
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHostController
 import br.com.pricewhisper.models.Product
-import br.com.pricewhisper.productListDestination
-import br.com.pricewhisper.ui.viewmodels.ProductViewModel
+import br.com.pricewhisper.ui.theme.PriceWhisperTheme
 import java.math.BigDecimal
 
 @Composable
 fun ProductFormScreen(
-    navController: NavHostController,
+    onClickBtnSubmit: (product: Product) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val viewModel = ProductViewModel()
-
     val name = remember { mutableStateOf("") }
     val price = remember { mutableStateOf("") }
     val stock = remember { mutableStateOf("") }
     val description = remember { mutableStateOf("") }
 
     Column(modifier = modifier, verticalArrangement = Arrangement.spacedBy(16.dp)) {
-        Text(
-            text = "Create Product",
-            fontSize = 24.sp
-        )
         Column {
             OutlinedTextField(
                 value = name.value,
@@ -68,21 +63,23 @@ fun ProductFormScreen(
                 stock = stock.value.toIntOrNull()?.toUInt() ?: 1u,
                 description = description.value
             )
-            viewModel.save(product = product)
-            navController.navigate(productListDestination.route)
+            onClickBtnSubmit(product)
         }) { Text("Submit") }
     }
 }
-//
-//@Preview(showSystemUi = true)
-//@Composable
-//private fun ProductFormPreview() {
-//    PriceWhisperTheme {
-//        ProductFormScreen(
-//            modifier = Modifier
-//                .fillMaxSize()
-//                .padding(16.dp),
-//            navController = navController
-//        )
-//    }
-//}
+
+@Preview(showSystemUi = true)
+@Composable
+private fun ProductFormPreview() {
+    PriceWhisperTheme {
+        Surface(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp)
+        ) {
+            ProductFormScreen(
+                onClickBtnSubmit = {}
+            )
+        }
+    }
+}

@@ -1,7 +1,7 @@
 package br.com.pricewhisper.ui.screens
 
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -11,37 +11,26 @@ import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import androidx.navigation.NavHostController
-import br.com.pricewhisper.productFormDestination
-import br.com.pricewhisper.ui.viewmodels.ProductViewModel
+import br.com.pricewhisper.models.Product
+import br.com.pricewhisper.ui.theme.PriceWhisperTheme
 
 @Composable
 fun ProductListScreen(
-    navController: NavHostController,
+    productList: List<Product>,
+    onClickNewProductFAB: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val viewModel = ProductViewModel()
-
-    Box {
-        Column(modifier = modifier) {
-            Text(
-                text = "Products List",
-                fontSize = 24.sp,
-                fontWeight = FontWeight(700)
-            )
-
-            ProductList(viewModel = viewModel)
-        }
-
+    Box(modifier = modifier) {
+        ProductList(productList = productList)
         FloatingActionButton(
-            onClick = { navController.navigate(productFormDestination.route) },
+            onClick = onClickNewProductFAB,
             containerColor = MaterialTheme.colorScheme.primary,
             modifier = Modifier
                 .align(alignment = Alignment.BottomEnd)
@@ -57,13 +46,11 @@ fun ProductListScreen(
 
 @Composable
 private fun ProductList(
-    viewModel: ProductViewModel,
+    productList: List<Product>,
     modifier: Modifier = Modifier
 ) {
-    viewModel.getAll()
-
     LazyColumn(modifier = modifier) {
-        items(items = viewModel.productList) {
+        items(items = productList) {
             ListItem(
                 headlineContent = { Text(it.name) },
                 supportingContent = { Text("R$ ${it.price}") }
@@ -72,17 +59,18 @@ private fun ProductList(
     }
 }
 
-//@Preview
-//@Composable
-//private fun ProductListPreview() {
-//    PriceWhisperTheme {
-//        Surface {
-//            ProductListScreen(
-//                modifier = Modifier
-//                    .fillMaxSize()
-//                    .padding(16.dp),
-//                navController = navController
-//            )
-//        }
-//    }
-//}
+@Preview
+@Composable
+private fun ProductListPreview() {
+    PriceWhisperTheme {
+        Surface {
+            ProductListScreen(
+                productList = listOf(),
+                onClickNewProductFAB = {},
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(16.dp),
+            )
+        }
+    }
+}
