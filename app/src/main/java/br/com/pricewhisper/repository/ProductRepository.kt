@@ -34,13 +34,14 @@ class ProductRepository {
                 val localBody = response.body?.string() ?: ""
                 Log.d("PRICE_WHISPER", localBody)
                 if (localBody != "" && localBody != "null") {
-                    val typeToken = object : TypeToken<HashMap<String?, Product?>>() {}.type
-                    val mapProduct: HashMap<String?, Product?> =
+                    val typeToken = object : TypeToken<HashMap<String, Product?>>() {}.type
+                    val mapProduct: HashMap<String, Product?> =
                         gson.fromJson(localBody, typeToken)
 
                     productList.clear()
                     mapProduct.forEach { (id, product) ->
                         if (product != null) {
+                            product.id = id
                             productList.add(product)
                         }
                     }

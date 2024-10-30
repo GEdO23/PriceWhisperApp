@@ -72,7 +72,7 @@ fun PriceWhisperApp(
 ) {
     val backStackEntry = navController.currentBackStackEntryAsState()
     val currentScreen = PriceWhisperScreen.valueOf(
-        backStackEntry.value?.destination?.route ?: PriceWhisperScreen.Home.title
+        backStackEntry.value?.destination?.route ?: PriceWhisperScreen.Home.name
     )
     
     Scaffold(
