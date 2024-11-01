@@ -35,6 +35,23 @@ class ProductViewModel : ViewModel() {
         }
     }
 
+    fun getById(
+        id: String,
+        onResult: (foundProduct: Product?) -> Unit
+    ) {
+        viewModelScope.launch {
+            repo.getProductFromFirebaseById(
+                id = id,
+                onRequestFailure = { error ->
+                    Log.e("PRICE_WHISPER", error.message.toString())
+                },
+                onRequestSuccess = { foundProduct ->
+                    onResult(foundProduct)
+                }
+            )
+        }
+    }
+    
     fun save(
         product: Product
     ) {
