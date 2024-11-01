@@ -1,7 +1,5 @@
 package br.com.pricewhisper.repository
 
-import android.util.Log
-import androidx.compose.runtime.snapshots.SnapshotStateList
 import br.com.pricewhisper.models.Product
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -20,7 +18,8 @@ class ProductRepository : IProductRepository {
     private val url: String = "https://omcorp-pricewhisper-default-rtdb.firebaseio.com"
 
     override fun getProductListFromFirebase(
-        productList: SnapshotStateList<Product>
+        onRequestSuccess: (products: HashMap<String, Product?>?) -> Unit,
+        onRequestFailure: (e: okio.IOException) -> Unit
     ) {
         val request = Request.Builder()
             .url("$url/products.json")
@@ -29,24 +28,17 @@ class ProductRepository : IProductRepository {
 
         val response = object : Callback {
             override fun onFailure(call: Call, e: IOException) {
-                Log.e("PRICE_WHISPER", e.message.toString())
+                onRequestFailure(e)
             }
 
             override fun onResponse(call: Call, response: Response) {
                 val localBody = response.body?.string() ?: ""
-                Log.d("PRICE_WHISPER", localBody)
                 if (localBody != "" && localBody != "null") {
                     val typeToken = object : TypeToken<HashMap<String, Product?>>() {}.type
                     val mapProduct: HashMap<String, Product?> =
                         gson.fromJson(localBody, typeToken)
 
-                    productList.clear()
-                    mapProduct.forEach { (id, product) ->
-                        if (product != null) {
-                            product.id = id
-                            productList.add(product)
-                        }
-                    }
+                    onRequestSuccess(mapProduct)
                 }
             }
         }
@@ -56,13 +48,17 @@ class ProductRepository : IProductRepository {
     }
 
     override fun getProductFromFirebaseById(
-        id: String
+        id: String,
+        onRequestSuccess: (productFound: Product?) -> Unit,
+        onRequestFailure: (e: okio.IOException) -> Unit
     ) {
         TODO("Not yet implemented")
     }
 
     override fun postProductToFirebase(
-        product: Product
+        product: Product,
+        onRequestSuccess: (productSaved: Product) -> Unit,
+        onRequestFailure: (e: okio.IOException) -> Unit
     ) {
         val json = gson.toJson(product)
         val body = json.toRequestBody("application/json".toMediaType())
@@ -74,11 +70,11 @@ class ProductRepository : IProductRepository {
 
         val response = object : Callback {
             override fun onFailure(call: Call, e: IOException) {
-                Log.e("PRICE_WHISPER", e.message.toString())
+                onRequestFailure(e)
             }
 
             override fun onResponse(call: Call, response: Response) {
-                Log.i("PRICE_WHISPER", "Product saved!")
+                onRequestSuccess(product)
             }
         }
 
@@ -88,13 +84,17 @@ class ProductRepository : IProductRepository {
 
     override fun updateProductInFirebase(
         id: String,
-        newProduct: Product
+        newProduct: Product,
+        onRequestSuccess: (oldProduct: Product, newProduct: Product) -> Unit,
+        onRequestFailure: (e: okio.IOException) -> Unit
     ) {
         TODO("Not yet implemented")
     }
 
     override fun deleteProductInFirebase(
-        id: String
+        id: String,
+        onRequestSuccess: (productDeleted: Product) -> Unit,
+        onRequestFailure: (e: okio.IOException) -> Unit
     ) {
         TODO("Not yet implemented")
     }
