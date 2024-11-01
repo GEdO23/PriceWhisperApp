@@ -14,12 +14,14 @@ import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.Response
 import java.io.IOException
 
-class ProductRepository {
+class ProductRepository : IProductRepository {
     private val httpClient = OkHttpClient()
     private val gson = Gson()
     private val url: String = "https://omcorp-pricewhisper-default-rtdb.firebaseio.com"
 
-    fun loadFirebase(productList: SnapshotStateList<Product>) {
+    override fun getProductListFromFirebase(
+        productList: SnapshotStateList<Product>
+    ) {
         val request = Request.Builder()
             .url("$url/products.json")
             .get()
@@ -53,7 +55,15 @@ class ProductRepository {
             .enqueue(response)
     }
 
-    fun saveInFirebase(product: Product) {
+    override fun getProductFromFirebaseById(
+        id: String
+    ) {
+        TODO("Not yet implemented")
+    }
+
+    override fun postProductToFirebase(
+        product: Product
+    ) {
         val json = gson.toJson(product)
         val body = json.toRequestBody("application/json".toMediaType())
 
@@ -74,5 +84,18 @@ class ProductRepository {
 
         httpClient.newCall(request)
             .enqueue(response)
+    }
+
+    override fun updateProductInFirebase(
+        id: String,
+        newProduct: Product
+    ) {
+        TODO("Not yet implemented")
+    }
+
+    override fun deleteProductInFirebase(
+        id: String
+    ) {
+        TODO("Not yet implemented")
     }
 }

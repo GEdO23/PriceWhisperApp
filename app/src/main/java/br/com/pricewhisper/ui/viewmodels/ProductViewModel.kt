@@ -10,10 +10,10 @@ class ProductViewModel {
     val productList = mutableStateListOf<Product>()
 
     fun save(product: Product) {
-        repo.saveInFirebase(product)
+        repo.postProductToFirebase(product)
     }
 
     fun getAll() {
-        repo.loadFirebase(productList)
+        repo.getProductListFromFirebase(productList)
     }
 }
