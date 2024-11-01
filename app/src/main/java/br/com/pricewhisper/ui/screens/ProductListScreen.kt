@@ -1,5 +1,6 @@
 package br.com.pricewhisper.ui.screens
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -23,12 +24,16 @@ import br.com.pricewhisper.ui.theme.PriceWhisperTheme
 
 @Composable
 fun ProductListScreen(
+    modifier: Modifier = Modifier,
     productList: List<Product>,
     onClickNewProductFAB: () -> Unit,
-    modifier: Modifier = Modifier
+    onClickProductItem: (productClicked: Product) -> Unit
 ) {
     Box(modifier = modifier) {
-        ProductList(productList = productList)
+        ProductList(
+            productList = productList,
+            onClickProductItem = onClickProductItem
+        )
         FloatingActionButton(
             onClick = onClickNewProductFAB,
             containerColor = MaterialTheme.colorScheme.primary,
@@ -46,15 +51,18 @@ fun ProductListScreen(
 
 @Composable
 private fun ProductList(
+    modifier: Modifier = Modifier,
     productList: List<Product>,
-    modifier: Modifier = Modifier
+    onClickProductItem: (productClicked: Product) -> Unit
 ) {
     LazyColumn(modifier = modifier) {
-        items(items = productList) {
-            ListItem(
-                headlineContent = { Text(it.name) },
-                supportingContent = { Text("R$ ${it.price}") }
-            )
+        items(items = productList) { product ->
+            Box(modifier = Modifier.clickable { onClickProductItem(product) }) {
+                ListItem(
+                    headlineContent = { Text(product.name) },
+                    supportingContent = { Text("R$ ${product.price}") }
+                )
+            }
         }
     }
 }
@@ -67,6 +75,7 @@ private fun ProductListPreview() {
             ProductListScreen(
                 productList = listOf(),
                 onClickNewProductFAB = {},
+                onClickProductItem = {},
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(16.dp),
