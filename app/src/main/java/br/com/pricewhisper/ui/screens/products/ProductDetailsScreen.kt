@@ -1,4 +1,4 @@
-package br.com.pricewhisper.ui.screens
+package br.com.pricewhisper.ui.screens.products
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -23,7 +23,7 @@ import br.com.pricewhisper.ui.theme.PriceWhisperTheme
 import java.math.BigDecimal
 
 @Composable
-fun ProductScreen(
+fun ProductDetailsScreen(
     modifier: Modifier = Modifier,
     product: Product,
     onClickEditMode: (product: Product) -> Unit
@@ -58,10 +58,10 @@ fun ProductScreen(
 
 @PreviewLightDark
 @Composable
-private fun ProductPreview() {
+private fun ProductDetailsPreview() {
     PriceWhisperTheme {
         Surface {
-            ProductScreen(
+            ProductDetailsScreen(
                 product = Product(
                     name = "Arroz",
                     price = BigDecimal("25.00"),

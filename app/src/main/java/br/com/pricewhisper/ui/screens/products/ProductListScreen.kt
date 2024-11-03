@@ -1,4 +1,4 @@
-package br.com.pricewhisper.ui.screens
+package br.com.pricewhisper.ui.screens.products
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,7 +12,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import br.com.pricewhisper.models.Product
 import br.com.pricewhisper.ui.components.products.ProductList
@@ -46,7 +46,7 @@ fun ProductListScreen(
     }
 }
 
-@Preview
+@PreviewLightDark
 @Composable
 private fun ProductListPreview() {
     val productList = mutableListOf<Product>()
