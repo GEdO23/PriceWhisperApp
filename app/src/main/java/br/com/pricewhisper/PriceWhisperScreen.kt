@@ -28,9 +28,9 @@ import androidx.navigation.compose.navigation
 import androidx.navigation.compose.rememberNavController
 import br.com.pricewhisper.models.Product
 import br.com.pricewhisper.ui.screens.HomeScreen
-import br.com.pricewhisper.ui.screens.ProductFormScreen
-import br.com.pricewhisper.ui.screens.ProductListScreen
-import br.com.pricewhisper.ui.screens.ProductScreen
+import br.com.pricewhisper.ui.screens.products.ProductDetailsScreen
+import br.com.pricewhisper.ui.screens.products.ProductFormScreen
+import br.com.pricewhisper.ui.screens.products.ProductListScreen
 import br.com.pricewhisper.ui.theme.PriceWhisperTheme
 import br.com.pricewhisper.ui.viewmodels.ProductViewModel
 
@@ -155,7 +155,7 @@ fun PriceWhisperApp(
                             }
 
                             productState.value?.let { product ->
-                                ProductScreen(
+                                ProductDetailsScreen(
                                     product = product,
                                     onClickEditMode = {}
                                 )
