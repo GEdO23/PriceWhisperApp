@@ -16,16 +16,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import br.com.pricewhisper.ui.theme.PriceWhisperTheme
 
 @Composable
 fun HomeScreen(
+    modifier: Modifier = Modifier,
     onClickProductsActionButton: () -> Unit,
     onClickProfileActionButton: () -> Unit,
-    onClickSettingsActionButton: () -> Unit,
-    modifier: Modifier = Modifier
+    onClickSettingsActionButton: () -> Unit
 ) {
     Column(
         verticalArrangement = Arrangement.spacedBy(32.dp),
@@ -68,7 +68,6 @@ private fun ButtonGroup(
     }
 }
 
-
 @Composable
 private fun ActionButton(
     modifier: Modifier = Modifier,
@@ -87,7 +86,7 @@ private fun ActionButton(
     }
 }
 
-@Preview(showSystemUi = true)
+@PreviewLightDark
 @Composable
 private fun HomePreview() {
     PriceWhisperTheme {
