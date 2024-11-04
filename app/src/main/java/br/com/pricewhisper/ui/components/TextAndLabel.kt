@@ -1,5 +1,6 @@
 package br.com.pricewhisper.ui.components
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -8,6 +9,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 
 data class TextAndLabelStyle(
     val primaryTextColor: Color,
@@ -19,7 +21,7 @@ fun TextAndLabel(
     modifier: Modifier = Modifier,
     horizontalArrangement: Arrangement.Horizontal,
     style: TextAndLabelStyle,
-    label: String,
+    @StringRes label: Int,
     text: String
 ) {
     Row(
@@ -27,7 +29,7 @@ fun TextAndLabel(
         horizontalArrangement = horizontalArrangement
     ) {
         Text(
-            text = label,
+            text = stringResource(label),
             color = style.primaryTextColor,
             style = MaterialTheme.typography.labelMedium
         )
@@ -44,7 +46,7 @@ fun TextAndLabel(
     modifier: Modifier = Modifier,
     verticalArrangement: Arrangement.Vertical,
     style: TextAndLabelStyle,
-    label: String,
+    @StringRes label: Int,
     text: String
 ) {
     Column(
@@ -52,7 +54,7 @@ fun TextAndLabel(
         verticalArrangement = verticalArrangement
     ) {
         Text(
-            text = label,
+            text = stringResource(label),
             color = style.primaryTextColor,
             style = MaterialTheme.typography.labelMedium
         )

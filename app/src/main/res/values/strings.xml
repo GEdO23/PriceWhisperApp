@@ -15,4 +15,7 @@
     <string name="form_field_label_product_stock">Stock</string>
     <string name="form_field_label_product_price">Price</string>
     <string name="form_field_label_product_name">Name</string>
+    <string name="product_details_label_price">Price:</string>
+    <string name="product_details_label_description">Description:</string>
+    <string name="product_details_label_stock">Stock:</string>
 </resources>
