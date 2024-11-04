@@ -25,6 +25,14 @@ import br.com.pricewhisper.ui.components.TextAndLabelStyle
 import br.com.pricewhisper.ui.theme.PriceWhisperTheme
 import java.math.BigDecimal
 
+/**
+ * Data class representing the style attributes for a Product Card.
+ *
+ * @property cardColor The background color of the card.
+ * @property primaryTextColor The primary text color used in the card.
+ * @property secondaryTextColor The secondary text color used in the card.
+ * @property cardBorderColor The border color of the card.
+ */
 data class ProductCardStyle(
     val cardColor: Color,
     val primaryTextColor: Color,
@@ -32,6 +40,15 @@ data class ProductCardStyle(
     val cardBorderColor: Color
 )
 
+/**
+ * Composable function to display a product card with a header and body.
+ *
+ * @param modifier Modifier to be applied to the card.
+ * @param style Style attributes for the product card, including colors and border.
+ * @param product The product data to be displayed in the card.
+ * @see Product
+ * @see ProductCardStyle
+ */
 @Composable
 fun ProductCard(
     modifier: Modifier = Modifier,
@@ -70,6 +87,15 @@ fun ProductCard(
     }
 }
 
+/**
+ * Composable function to display the header of a product card.
+ *
+ * @param modifier Modifier to be applied to the header.
+ * @param style Style attributes for the product card, including colors and border.
+ * @param product The product data to be displayed in the header.
+ * @see Product
+ * @see ProductCardStyle
+ */
 @Composable
 private fun ProductCardHeader(
     modifier: Modifier = Modifier,
@@ -89,6 +115,15 @@ private fun ProductCardHeader(
     }
 }
 
+/**
+ * Composable function to display the body of a product card.
+ *
+ * @param modifier Modifier to be applied to the body.
+ * @param style Style attributes for the product card, including colors and border.
+ * @param product The product data to be displayed in the body.
+ * @see Product
+ * @see ProductCardStyle
+ */
 @Composable
 private fun ProductCardBody(
     modifier: Modifier = Modifier,
