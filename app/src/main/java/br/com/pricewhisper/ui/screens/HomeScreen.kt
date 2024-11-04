@@ -57,15 +57,15 @@ private fun ButtonGroup(
         modifier = modifier
     ) {
         ActionButton(
-            label = stringResource(R.string.actionbtn_products_label),
+            label = R.string.actionbtn_products_label,
             modifier = Modifier.widthIn(min = 100.dp, max = 100.dp)
         ) { onClickProductsActionButton() }
         ActionButton(
-            label = stringResource(R.string.actionbtn_profile_label),
+            label = R.string.actionbtn_profile_label,
             modifier = Modifier.widthIn(min = 100.dp, max = 100.dp)
         ) { onClickProfileActionButton() }
         ActionButton(
-            label = stringResource(R.string.actionbtn_settings_label),
+            label = R.string.actionbtn_settings_label,
             modifier = Modifier.widthIn(min = 100.dp, max = 100.dp)
         ) { onClickSettingsActionButton() }
     }
@@ -74,7 +74,7 @@ private fun ButtonGroup(
 @Composable
 private fun ActionButton(
     modifier: Modifier = Modifier,
-    @StringRes label: String,
+    @StringRes label: Int,
     onClick: () -> Unit
 ) {
     Column(
@@ -83,7 +83,7 @@ private fun ActionButton(
     ) {
         FilledIconButton(onClick = onClick) { }
         Text(
-            text = label,
+            text = stringResource(label),
             textAlign = TextAlign.Center
         )
     }
