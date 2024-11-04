@@ -1,5 +1,6 @@
 package br.com.pricewhisper
 
+import android.content.Context
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -21,9 +22,11 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -37,21 +40,12 @@ import br.com.pricewhisper.ui.screens.products.ProductFormScreen
 import br.com.pricewhisper.ui.screens.products.ProductListScreen
 import br.com.pricewhisper.ui.theme.PriceWhisperTheme
 import br.com.pricewhisper.ui.viewmodels.ProductViewModel
+import br.com.pricewhisper.ui.viewmodels.ThemeViewModel
+import kotlinx.coroutines.launch
 
 class MainActivity : ComponentActivity() {
-    private val viewModel = viewModels<ProductViewModel>()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            PriceWhisperTheme {
-                PriceWhisperApp(
-                    viewModel = viewModel
-                )
-            }
-        }
-    }
+    private val themeViewModel = viewModels<ThemeViewModel>()
+    private val productViewModel = viewModels<ProductViewModel>()
 
     enum class PriceWhisperScreen(@StringRes val title: Int) {
         HomeScreen(title = R.string.home_screen_title),
@@ -60,11 +54,31 @@ class MainActivity : ComponentActivity() {
         EditProductScreen(title = R.string.edit_product_screen_title),
         ProductDetailsScreen(title = R.string.product_details_screen_title)
     }
-    
+
     enum class PriceWhisperNavGraph {
         Products,
         Profile,
         Settings
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        
+        lifecycleScope.launch {
+            themeViewModel.value.currentPrefs.value = getPreferences(Context.MODE_PRIVATE)
+            themeViewModel.value.isDarkModeOn.value = themeViewModel.value.getCurrentPalette()
+        }
+
+        enableEdgeToEdge()
+        setContent {
+            PriceWhisperTheme(
+                darkMode = remember { themeViewModel.value.isDarkModeOn }
+            ) {
+                PriceWhisperApp(
+                    viewModel = productViewModel
+                )
+            }
+        }
     }
 
     @OptIn(ExperimentalMaterial3Api::class)
@@ -129,9 +143,7 @@ class MainActivity : ComponentActivity() {
                     composable(PriceWhisperScreen.HomeScreen.name) {
                         HomeScreen(
                             onClickProductsActionButton = {
-                                navController.navigate(
-                                    PriceWhisperScreen.ProductListScreen.name
-                                )
+                                themeViewModel.value.switchPalette()
                             },
                             onClickProfileActionButton = {},
                             onClickSettingsActionButton = {}
