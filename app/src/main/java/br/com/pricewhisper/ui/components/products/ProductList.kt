@@ -19,6 +19,14 @@ import br.com.pricewhisper.R
 import br.com.pricewhisper.models.Product
 import java.math.BigDecimal
 
+/**
+ * Composable function to display a list of products.
+ *
+ * @param modifier Modifier to be applied to the list.
+ * @param productList List of products to be displayed.
+ * @param onClickItem Callback function to be invoked when a product is clicked.
+ * @param onClickDelete Callback function to be invoked when the delete icon is clicked.
+ */
 @Composable
 fun ProductList(
     modifier: Modifier = Modifier,
@@ -37,6 +45,14 @@ fun ProductList(
     }
 }
 
+/**
+ * Composable function to display a single product item in the list.
+ *
+ * @param modifier Modifier to be applied to the item.
+ * @param product The product data to be displayed.
+ * @param onClick Callback function to be invoked when the item is clicked.
+ * @param onClickDelete Callback function to be invoked when the delete icon is clicked.
+ */
 @Composable
 private fun ProductListItem(
     modifier: Modifier = Modifier,
