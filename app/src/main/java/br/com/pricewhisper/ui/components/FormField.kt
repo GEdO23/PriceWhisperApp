@@ -1,5 +1,6 @@
 package br.com.pricewhisper.ui.components
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
@@ -12,7 +13,7 @@ import androidx.compose.ui.text.input.KeyboardType
 fun FormFieldText(
     modifier: Modifier = Modifier,
     value: MutableState<String>,
-    label: String
+    @StringRes label: String
 ) {
     OutlinedTextField(
         modifier = modifier,
@@ -26,7 +27,7 @@ fun FormFieldText(
 fun FormFieldPrice(
     modifier: Modifier = Modifier,
     value: MutableState<String>,
-    label: String,
+    @StringRes label: String,
     currencyCode: String
 ) {
     OutlinedTextField(
@@ -43,7 +44,7 @@ fun FormFieldPrice(
 fun FormFieldStock(
     modifier: Modifier = Modifier,
     value: MutableState<String>,
-    label: String
+    @StringRes label: String
 ) {
     OutlinedTextField(
         modifier = modifier,
