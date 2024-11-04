@@ -33,24 +33,24 @@ fun ProductForm(
         Column {
             FormFieldText(
                 value = name,
-                label = stringResource(R.string.form_field_label_product_name)
+                label = R.string.form_field_label_product_name
             )
             FormFieldPrice(
                 value = price,
-                label = stringResource(R.string.form_field_label_product_price),
+                label = R.string.form_field_label_product_price,
                 currencyCode = "R$"
             )
             FormFieldStock(
                 value = stock,
-                label = stringResource(R.string.form_field_label_product_stock)
+                label = R.string.form_field_label_product_stock
             )
             FormFieldText(
                 value = description,
-                label = stringResource(R.string.form_field_label_product_description)
+                label = R.string.form_field_label_product_description
             )
         }
         ProductFormSubmitButton(
-            text = stringResource(R.string.btn_submit_text),
+            text = R.string.btn_submit_text,
             product = toProduct(
                 name = name.value,
                 price = price.value,
@@ -65,14 +65,14 @@ fun ProductForm(
 @Composable
 private fun ProductFormSubmitButton(
     modifier: Modifier = Modifier,
-    @StringRes text: String,
+    @StringRes text: Int,
     product: Product,
     onSubmit: (product: Product) -> Unit
 ) {
     Button(
         modifier = modifier,
         onClick = { onSubmit(product) }
-    ) { Text(text) }
+    ) { Text(stringResource(text)) }
 }
 
 private fun toProduct(
