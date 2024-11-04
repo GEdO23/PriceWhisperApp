@@ -16,10 +16,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -32,7 +29,6 @@ import br.com.pricewhisper.ui.screens.HomeScreen
 import br.com.pricewhisper.ui.screens.products.ProductDetailsScreen
 import br.com.pricewhisper.ui.screens.products.ProductFormScreen
 import br.com.pricewhisper.ui.screens.products.ProductListScreen
-import br.com.pricewhisper.ui.theme.PriceWhisperTheme
 import br.com.pricewhisper.ui.viewmodels.ProductViewModel
 
 enum class PriceWhisperScreen(val title: String) {
@@ -75,6 +71,7 @@ fun PriceWhisperAppBar(
 
 @Composable
 fun PriceWhisperApp(
+    viewModel: Lazy<ProductViewModel>,
     navController: NavHostController = rememberNavController()
 ) {
     val backStackEntry = navController.currentBackStackEntryAsState()
@@ -118,107 +115,70 @@ fun PriceWhisperApp(
                     startDestination = PriceWhisperScreen.ProductListScreen.name
                 ) {
                     composable(PriceWhisperScreen.ProductListScreen.name) {
-                        val viewModel = ProductViewModel()
-                        
+                        LaunchedEffect(true) {
+                            viewModel.value.loadProducts()
+                            viewModel.value.currentProduct.value = Product()
+                        }
+
                         ProductListScreen(
-                            productList = viewModel.productList,
+                            productList = viewModel.value.productList,
                             onClickNewProductFAB = {
                                 navController.navigate(PriceWhisperScreen.RegisterProductScreen.name)
                             },
                             onClickProductItem = { product ->
                                 Log.d("PRICE_WHISPER", "Product Clicked: $product")
-                                navController.navigate("${PriceWhisperScreen.ProductDetailsScreen.name}/${product.id}")
+                                viewModel.value.currentProduct.value = product
+                                navController.navigate(PriceWhisperScreen.ProductDetailsScreen.name)
                             },
                             onClickDelete = { productId ->
                                 Log.d("PRICE_WHISPER", "Product Deleted: $productId")
-                                viewModel.delete(
+                                viewModel.value.deleteProduct(
                                     id = productId,
                                     onResult = {
-                                        viewModel.getAll()
+                                        viewModel.value.loadProducts()
                                     }
                                 )
                             }
                         )
                     }
                     composable(PriceWhisperScreen.RegisterProductScreen.name) {
-                        val viewModel = ProductViewModel()
                         ProductFormScreen(
                             onClickBtnSubmit = { product ->
-                                viewModel.save(product)
+                                viewModel.value.saveProduct(product)
                                 navController.popBackStack()
                             }
                         )
                     }
-                    composable("${PriceWhisperScreen.ProductDetailsScreen.name}/{productId}") {
-                        val viewModel = ProductViewModel()
-                        val productId = it.arguments?.getString("productId")
+                    composable(PriceWhisperScreen.ProductDetailsScreen.name) {
+                        val productClicked = viewModel.value.currentProduct.value
 
-                        productId?.let {
-                            val productState = remember { mutableStateOf<Product?>(null) }
-
-                            LaunchedEffect(productId) {
-                                viewModel.getById(
-                                    id = productId,
-                                    onResult = { foundProduct ->
-                                        productState.value = foundProduct
-                                    }
-                                )
-                            }
-
-                            productState.value?.let { product ->
-                                ProductDetailsScreen(
-                                    product = product,
-                                    onClickEditMode = {
-                                        navController.navigate("${PriceWhisperScreen.EditProductScreen.name}/$productId")
-                                    }
-                                )
-                            } ?: run {
-                                Text("Carregando...")
-                            }
-                        }
+                        productClicked?.let { product ->
+                            ProductDetailsScreen(
+                                product = product,
+                                onClickEditMode = {
+                                    navController.navigate(PriceWhisperScreen.EditProductScreen.name)
+                                }
+                            )
+                        } ?: Text("Carregando")
                     }
-                    composable("${PriceWhisperScreen.EditProductScreen.name}/{productId}") {
-                        val viewModel = ProductViewModel()
-                        val productId = it.arguments?.getString("productId")
+                    composable(PriceWhisperScreen.EditProductScreen.name) {
+                        val productClicked = viewModel.value.currentProduct.value
 
-                        productId?.let { id ->
-                            val productState = remember { mutableStateOf<Product?>(null) }
-
-                            LaunchedEffect(productId) {
-                                viewModel.getById(
-                                    id = id,
-                                    onResult = { foundProduct ->
-                                        productState.value = foundProduct
-                                    }
-                                )
-                            }
-
-                            productState.value?.let { product ->
-                                ProductFormScreen(
-                                    filledProduct = product,
-                                    onClickBtnSubmit = { newProduct ->
-                                        viewModel.edit(
-                                            id = id,
-                                            newProduct = newProduct
-                                        )
-                                        navController.popBackStack()
-                                    }
-                                )
-                            } ?: run {
-                                Text("Carregando...")
-                            }
-                        }
+                        productClicked?.let { product ->
+                            ProductFormScreen(
+                                filledProduct = product,
+                                onClickBtnSubmit = { newProduct ->
+                                    viewModel.value.editProduct(
+                                        id = product.id,
+                                        newProduct = newProduct
+                                    )
+                                    navController.popBackStack()
+                                }
+                            )
+                        } ?: Text("Carregando")
                     }
                 }
             }
         }
-    }
-}
-
-@Preview
-@Composable
-private fun PriceWhisperPreview() {
-    PriceWhisperTheme {
-        PriceWhisperApp()
     }
 }

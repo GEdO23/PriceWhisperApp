@@ -2,6 +2,7 @@ package br.com.pricewhisper.ui.viewmodels
 
 import android.util.Log
 import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import br.com.pricewhisper.models.Product
@@ -11,8 +12,9 @@ import kotlinx.coroutines.launch
 class ProductViewModel : ViewModel() {
     private val repo = ProductRepository()
     val productList = mutableStateListOf<Product>()
+    val currentProduct = mutableStateOf<Product?>(null)
 
-    fun getAll() {
+    fun loadProducts() {
         viewModelScope.launch {
             repo.getProductListFromFirebase(
                 onRequestFailure = { error ->
@@ -34,24 +36,7 @@ class ProductViewModel : ViewModel() {
         }
     }
 
-    fun getById(
-        id: String,
-        onResult: (foundProduct: Product?) -> Unit
-    ) {
-        viewModelScope.launch {
-            repo.getProductFromFirebaseById(
-                id = id,
-                onRequestFailure = { error ->
-                    Log.e("PRICE_WHISPER", error.message.toString())
-                },
-                onRequestSuccess = { foundProduct ->
-                    onResult(foundProduct)
-                }
-            )
-        }
-    }
-
-    fun save(
+    fun saveProduct(
         product: Product
     ) {
         viewModelScope.launch {
@@ -70,7 +55,7 @@ class ProductViewModel : ViewModel() {
         }
     }
 
-    fun edit(
+    fun editProduct(
         id: String,
         newProduct: Product,
     ) {
@@ -91,7 +76,7 @@ class ProductViewModel : ViewModel() {
         }
     }
 
-    fun delete(
+    fun deleteProduct(
         id: String,
         onResult: (deletedProduct: Product?) -> Unit
     ) {

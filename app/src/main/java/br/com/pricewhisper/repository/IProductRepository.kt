@@ -16,19 +16,6 @@ interface IProductRepository {
     )
 
     /**
-     * Gets a [Product] from the Firebase Realtime Database [Product] List by its ID
-     * @param id The identifier of the [Product] to be found
-     * @param onRequestSuccess What should happen if the request succeeds
-     * @param onRequestFailure What should happen if the request fails
-     * @see Product
-     */
-    fun getProductFromFirebaseById(
-        id: String,
-        onRequestSuccess: (productFound: Product?) -> Unit,
-        onRequestFailure: (e: IOException) -> Unit
-    )
-
-    /**
      * Saves a new [Product] on the Firebase Realtime Database [Product] List
      * @param product The [Product] to be saved
      * @param onRequestSuccess What should happen if the request succeeds
