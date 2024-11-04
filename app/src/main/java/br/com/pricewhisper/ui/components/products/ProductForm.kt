@@ -17,6 +17,16 @@ import br.com.pricewhisper.ui.components.FormFieldStock
 import br.com.pricewhisper.ui.components.FormFieldText
 import java.math.BigDecimal
 
+/**
+ * Composable function to display a form for creating or editing a product.
+ *
+ * @param modifier Modifier to be applied to the form.
+ * @param name MutableState holding the product name.
+ * @param price MutableState holding the product price.
+ * @param stock MutableState holding the product stock.
+ * @param description MutableState holding the product description.
+ * @param onSubmit Callback function to be invoked when the form is submitted.
+ */
 @Composable
 fun ProductForm(
     modifier: Modifier = Modifier,
@@ -62,6 +72,14 @@ fun ProductForm(
     }
 }
 
+/**
+ * Composable function to display a submit button for the product form.
+ *
+ * @param modifier Modifier to be applied to the button.
+ * @param text Resource ID for the button text.
+ * @param product The product data to be submitted.
+ * @param onSubmit Callback function to be invoked when the button is clicked.
+ */
 @Composable
 private fun ProductFormSubmitButton(
     modifier: Modifier = Modifier,
@@ -75,6 +93,15 @@ private fun ProductFormSubmitButton(
     ) { Text(stringResource(text)) }
 }
 
+/**
+ * Converts form input values to a Product object.
+ *
+ * @param name The product name.
+ * @param price The product price as a string.
+ * @param stock The product stock as a string.
+ * @param description The product description.
+ * @return A Product object with the provided values.
+ */
 private fun toProduct(
     name: String,
     price: String,
