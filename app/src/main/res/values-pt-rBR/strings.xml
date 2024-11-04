@@ -8,4 +8,6 @@
     <string name="actionbtn_products_label">Produtos</string>
     <string name="actionbtn_settings_label">Ajustes</string>
     <string name="actionbtn_profile_label">Perfil</string>
+    <string name="fab_new_product_icon_description">Adcionar novo produto</string>
+    <string name="fab_edit_product_icon_description">Editar produto</string>
 </resources>
