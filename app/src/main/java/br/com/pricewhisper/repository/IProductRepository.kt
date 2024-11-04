@@ -65,7 +65,7 @@ interface IProductRepository {
      */
     fun deleteProductInFirebase(
         id: String,
-        onRequestSuccess: (productDeleted: Product) -> Unit,
+        onRequestSuccess: (productDeleted: Product?) -> Unit,
         onRequestFailure: (e: IOException) -> Unit
     )
 }
