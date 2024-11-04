@@ -5,4 +5,7 @@
     <string name="register_product_screen_title">Cadastrar Produto</string>
     <string name="edit_product_screen_title">Editar Produto</string>
     <string name="product_details_screen_title">Detalhes de Produto</string>
+    <string name="actionbtn_products_label">Produtos</string>
+    <string name="actionbtn_settings_label">Ajustes</string>
+    <string name="actionbtn_profile_label">Perfil</string>
 </resources>
