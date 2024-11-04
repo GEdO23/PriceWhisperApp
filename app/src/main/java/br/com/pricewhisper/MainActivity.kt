@@ -60,6 +60,12 @@ class MainActivity : ComponentActivity() {
         EditProductScreen(title = R.string.edit_product_screen_title),
         ProductDetailsScreen(title = R.string.product_details_screen_title)
     }
+    
+    enum class PriceWhisperNavGraph {
+        Products,
+        Profile,
+        Settings
+    }
 
     @OptIn(ExperimentalMaterial3Api::class)
     @Composable
@@ -133,7 +139,7 @@ class MainActivity : ComponentActivity() {
                     }
 
                     navigation(
-                        route = "products",
+                        route = PriceWhisperNavGraph.Products.name,
                         startDestination = PriceWhisperScreen.ProductListScreen.name
                     ) {
                         composable(PriceWhisperScreen.ProductListScreen.name) {
