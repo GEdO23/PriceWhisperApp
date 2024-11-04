@@ -129,6 +129,9 @@ fun PriceWhisperApp(
                             onClickProductItem = { product ->
                                 Log.d("PRICE_WHISPER", "Product Clicked: $product")
                                 navController.navigate("${PriceWhisperScreen.ProductDetailsScreen.name}/${product.id}")
+                            },
+                            onClickDelete = { productId ->
+                                Log.d("PRICE_WHISPER", "Product Deleted: $productId")
                             }
                         )
                     }

@@ -24,12 +24,14 @@ fun ProductListScreen(
     modifier: Modifier = Modifier,
     productList: List<Product>,
     onClickNewProductFAB: () -> Unit,
-    onClickProductItem: (productClicked: Product) -> Unit
+    onClickProductItem: (productClicked: Product) -> Unit,
+    onClickDelete: (id: String) -> Unit
 ) {
     Box(modifier = modifier) {
         ProductList(
             productList = productList,
-            onClickItem = { onClickProductItem(it) }
+            onClickItem = { onClickProductItem(it) },
+            onClickDelete = { onClickDelete(it) }
         )
         FloatingActionButton(
             onClick = onClickNewProductFAB,
@@ -65,6 +67,7 @@ private fun ProductListPreview() {
                 productList = productList,
                 onClickNewProductFAB = {},
                 onClickProductItem = {},
+                onClickDelete = {},
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(16.dp),
