@@ -27,7 +27,6 @@ class ProductViewModel : ViewModel() {
                         if (product != null) {
                             product.id = id
                             productList.add(product)
-                            Log.d("PRICE_WHISPER", "PRODUCT '$id': $product")
                         }
                     }
                 }
@@ -88,6 +87,24 @@ class ProductViewModel : ViewModel() {
                 onRequestSuccess = { product ->
                     Log.d("PRICE_WHISPER", "Product Updated: $product")
                 }
+            )
+        }
+    }
+
+    fun delete(
+        id: String,
+        onResult: (deletedProduct: Product?) -> Unit
+    ) {
+        viewModelScope.launch {
+            repo.deleteProductInFirebase(
+                id = id,
+                onRequestFailure = { error ->
+                    Log.e(
+                        "PRICE_WHISPER",
+                        "DELETE PRODUCT FROM FIREBASE FAILED:\n${error.message}"
+                    )
+                },
+                onRequestSuccess = { onResult(it) }
             )
         }
     }
