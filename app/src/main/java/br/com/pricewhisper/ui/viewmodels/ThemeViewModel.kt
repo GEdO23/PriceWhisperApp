@@ -36,7 +36,7 @@ class ThemeViewModel : ViewModel() {
     fun switchPalette() {
         currentPrefs.value
             ?.edit()
-            ?.putBoolean(SHARED_PREFS_PALETTE_KEY, isDarkModeOn.value)
+            ?.putBoolean(SHARED_PREFS_PALETTE_KEY, !isDarkModeOn.value)
             ?.apply()
         isDarkModeOn.value = getCurrentPalette()
     }
