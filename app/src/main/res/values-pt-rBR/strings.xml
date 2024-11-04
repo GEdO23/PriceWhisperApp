@@ -20,4 +20,5 @@
     <string name="product_details_label_stock">Estoque:</string>
     <string name="productlist_item_icon_description_delete">Deletar produto</string>
     <string name="top_app_bar_navigation_icon_description">Voltar</string>
+    <string name="loading_text">Carregando…</string>
 </resources>
