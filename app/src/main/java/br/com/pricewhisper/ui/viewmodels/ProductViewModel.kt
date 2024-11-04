@@ -84,7 +84,9 @@ class ProductViewModel : ViewModel() {
                         "EDIT PRODUCT FROM FIREBASE FAILED:\n${error.message}"
                     )
                 },
-                onRequestSuccess = {}
+                onRequestSuccess = { updatedProduct ->
+                    currentProduct.value = updatedProduct
+                }
             )
         }
     }
