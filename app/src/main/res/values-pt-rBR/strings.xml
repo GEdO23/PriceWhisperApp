@@ -10,4 +10,9 @@
     <string name="actionbtn_profile_label">Perfil</string>
     <string name="fab_new_product_icon_description">Adcionar novo produto</string>
     <string name="fab_edit_product_icon_description">Editar produto</string>
+    <string name="btn_submit_text">Enviar</string>
+    <string name="form_field_label_product_description">Descrição</string>
+    <string name="form_field_label_product_stock">Estoque</string>
+    <string name="form_field_label_product_price">Preço</string>
+    <string name="form_field_label_product_name">Nome</string>
 </resources>

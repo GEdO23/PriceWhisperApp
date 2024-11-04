@@ -1,5 +1,6 @@
 package br.com.pricewhisper.ui.components.products
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Button
@@ -7,7 +8,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import br.com.pricewhisper.R
 import br.com.pricewhisper.models.Product
 import br.com.pricewhisper.ui.components.FormFieldPrice
 import br.com.pricewhisper.ui.components.FormFieldStock
@@ -30,23 +33,24 @@ fun ProductForm(
         Column {
             FormFieldText(
                 value = name,
-                label = "Name"
+                label = stringResource(R.string.form_field_label_product_name)
             )
             FormFieldPrice(
                 value = price,
-                label = "Price",
+                label = stringResource(R.string.form_field_label_product_price),
                 currencyCode = "R$"
             )
             FormFieldStock(
                 value = stock,
-                label = "Stock"
+                label = stringResource(R.string.form_field_label_product_stock)
             )
             FormFieldText(
                 value = description,
-                label = "Description"
+                label = stringResource(R.string.form_field_label_product_description)
             )
         }
         ProductFormSubmitButton(
+            text = stringResource(R.string.btn_submit_text),
             product = toProduct(
                 name = name.value,
                 price = price.value,
@@ -61,13 +65,14 @@ fun ProductForm(
 @Composable
 private fun ProductFormSubmitButton(
     modifier: Modifier = Modifier,
+    @StringRes text: String,
     product: Product,
     onSubmit: (product: Product) -> Unit
 ) {
     Button(
         modifier = modifier,
         onClick = { onSubmit(product) }
-    ) { Text("Submit") }
+    ) { Text(text) }
 }
 
 private fun toProduct(

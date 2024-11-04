@@ -10,4 +10,9 @@
     <string name="actionbtn_settings_label">Settings</string>
     <string name="fab_new_product_icon_description">Add new product</string>
     <string name="fab_edit_product_icon_description">Edit Product</string>
+    <string name="btn_submit_text">Submit</string>
+    <string name="form_field_label_product_description">Description</string>
+    <string name="form_field_label_product_stock">Stock</string>
+    <string name="form_field_label_product_price">Price</string>
+    <string name="form_field_label_product_name">Name</string>
 </resources>
