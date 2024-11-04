@@ -1,6 +1,5 @@
 package br.com.pricewhisper
 
-import android.util.Log
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -126,12 +125,10 @@ fun PriceWhisperApp(
                                 navController.navigate(PriceWhisperScreen.RegisterProductScreen.name)
                             },
                             onClickProductItem = { product ->
-                                Log.d("PRICE_WHISPER", "Product Clicked: $product")
                                 viewModel.value.currentProduct.value = product
                                 navController.navigate(PriceWhisperScreen.ProductDetailsScreen.name)
                             },
                             onClickDelete = { productId ->
-                                Log.d("PRICE_WHISPER", "Product Deleted: $productId")
                                 viewModel.value.deleteProduct(
                                     id = productId,
                                     onResult = {

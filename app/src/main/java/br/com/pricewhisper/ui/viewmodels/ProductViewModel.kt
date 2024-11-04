@@ -48,9 +48,7 @@ class ProductViewModel : ViewModel() {
                         "POST PRODUCT TO FIREBASE FAILED:\n${error.message}"
                     )
                 },
-                onRequestSuccess = { productSaved ->
-                    Log.d("PRICE_WHISPER", "Product saved: $productSaved")
-                }
+                onRequestSuccess = {}
             )
         }
     }
@@ -69,9 +67,7 @@ class ProductViewModel : ViewModel() {
                         "EDIT PRODUCT FROM FIREBASE FAILED:\n${error.message}"
                     )
                 },
-                onRequestSuccess = { product ->
-                    Log.d("PRICE_WHISPER", "Product Updated: $product")
-                }
+                onRequestSuccess = {}
             )
         }
     }

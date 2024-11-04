@@ -1,6 +1,5 @@
 package br.com.pricewhisper.repository
 
-import android.util.Log
 import br.com.pricewhisper.models.Product
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -127,12 +126,7 @@ class ProductRepository : IProductRepository {
             }
 
             override fun onResponse(call: Call, response: Response) {
-                response.use {
-                    val localBody = it.body?.string()
-                    Log.d("PRICE_WHISPER", "LocalBody: $localBody")
-
-                    onRequestSuccess(null)
-                }
+                onRequestSuccess(null)
             }
         }
 
