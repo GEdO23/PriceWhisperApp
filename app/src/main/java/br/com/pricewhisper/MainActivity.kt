@@ -185,7 +185,7 @@ class MainActivity : ComponentActivity() {
                                         navController.navigate(PriceWhisperScreen.EditProductScreen.name)
                                     }
                                 )
-                            } ?: Text("Carregando")
+                            } ?: Text(stringResource(R.string.loading_text))
                         }
                         composable(PriceWhisperScreen.EditProductScreen.name) {
                             val productClicked = viewModel.value.currentProduct.value
@@ -201,7 +201,7 @@ class MainActivity : ComponentActivity() {
                                         navController.popBackStack()
                                     }
                                 )
-                            } ?: Text("Carregando")
+                            } ?: Text(stringResource(R.string.loading_text))
                         }
                     }
                 }
