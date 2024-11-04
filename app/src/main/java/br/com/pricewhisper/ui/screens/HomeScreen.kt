@@ -1,5 +1,6 @@
 package br.com.pricewhisper.ui.screens
 
+import androidx.annotation.StringRes
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -15,9 +16,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
+import br.com.pricewhisper.R
 import br.com.pricewhisper.ui.theme.PriceWhisperTheme
 
 @Composable
@@ -54,15 +57,15 @@ private fun ButtonGroup(
         modifier = modifier
     ) {
         ActionButton(
-            label = "Products",
+            label = stringResource(R.string.actionbtn_products_label),
             modifier = Modifier.widthIn(min = 100.dp, max = 100.dp)
         ) { onClickProductsActionButton() }
         ActionButton(
-            label = "Profile",
+            label = stringResource(R.string.actionbtn_profile_label),
             modifier = Modifier.widthIn(min = 100.dp, max = 100.dp)
         ) { onClickProfileActionButton() }
         ActionButton(
-            label = "Settings",
+            label = stringResource(R.string.actionbtn_settings_label),
             modifier = Modifier.widthIn(min = 100.dp, max = 100.dp)
         ) { onClickSettingsActionButton() }
     }
@@ -71,7 +74,7 @@ private fun ButtonGroup(
 @Composable
 private fun ActionButton(
     modifier: Modifier = Modifier,
-    label: String,
+    @StringRes label: String,
     onClick: () -> Unit
 ) {
     Column(

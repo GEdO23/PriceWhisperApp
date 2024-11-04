@@ -2,10 +2,10 @@
     <string name="app_name" translatable="false">Price Whisper</string>
     <string name="home_screen_title">Home</string>
     <string name="product_list_screen_title">Product List</string>
-    <string name="register_product_screen_title">New Product</string>
-    <string name="edit_product_screen_title">Edit Product</string>
-    <string name="product_details_screen_title">Product Details</string>
     <string name="register_product_screen_title">Register Product</string>
     <string name="edit_product_screen_title">Edit Product</string>
     <string name="product_details_screen_title">Product Details</string>
+    <string name="actionbtn_products_label">Products</string>
+    <string name="actionbtn_profile_label">Profile</string>
+    <string name="actionbtn_settings_label">Settings</string>
 </resources>
