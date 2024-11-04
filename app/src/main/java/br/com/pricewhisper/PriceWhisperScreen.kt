@@ -1,5 +1,6 @@
 package br.com.pricewhisper
 
+import android.util.Log
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -35,10 +36,11 @@ import br.com.pricewhisper.ui.theme.PriceWhisperTheme
 import br.com.pricewhisper.ui.viewmodels.ProductViewModel
 
 enum class PriceWhisperScreen(val title: String) {
-    Home(title = "Home"),
-    ProductList(title = "Product List"),
-    ProductForm(title = "Product Form"),
-    ProductDetails(title = "Product Details")
+    HomeScreen(title = "Home"),
+    ProductListScreen(title = "Product List"),
+    RegisterProductScreen(title = "New Product"),
+    EditProductScreen(title = "Edit Product"),
+    ProductDetailsScreen(title = "Product Details")
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -78,7 +80,7 @@ fun PriceWhisperApp(
     val backStackEntry = navController.currentBackStackEntryAsState()
     val currentScreen = PriceWhisperScreen.entries.find {
         backStackEntry.value?.destination?.route?.startsWith(it.name) == true
-    } ?: PriceWhisperScreen.Home
+    } ?: PriceWhisperScreen.HomeScreen
 
     Scaffold(
         topBar = {
@@ -96,14 +98,14 @@ fun PriceWhisperApp(
         ) {
             NavHost(
                 navController = navController,
-                startDestination = PriceWhisperScreen.Home.name,
+                startDestination = PriceWhisperScreen.HomeScreen.name,
                 modifier = Modifier.padding(16.dp)
             ) {
-                composable(PriceWhisperScreen.Home.name) {
+                composable(PriceWhisperScreen.HomeScreen.name) {
                     HomeScreen(
                         onClickProductsActionButton = {
                             navController.navigate(
-                                PriceWhisperScreen.ProductList.name
+                                PriceWhisperScreen.ProductListScreen.name
                             )
                         },
                         onClickProfileActionButton = {},
@@ -113,23 +115,24 @@ fun PriceWhisperApp(
 
                 navigation(
                     route = "products",
-                    startDestination = PriceWhisperScreen.ProductList.name
+                    startDestination = PriceWhisperScreen.ProductListScreen.name
                 ) {
-                    composable(PriceWhisperScreen.ProductList.name) {
+                    composable(PriceWhisperScreen.ProductListScreen.name) {
                         val viewModel = ProductViewModel()
                         viewModel.getAll()
-                        
+
                         ProductListScreen(
                             productList = viewModel.productList,
                             onClickNewProductFAB = {
-                                navController.navigate(PriceWhisperScreen.ProductForm.name)
+                                navController.navigate(PriceWhisperScreen.RegisterProductScreen.name)
                             },
                             onClickProductItem = { product ->
-                                navController.navigate("${PriceWhisperScreen.ProductDetails.name}/${product.id}")
+                                Log.d("PRICE_WHISPER", "Product Clicked: $product")
+                                navController.navigate("${PriceWhisperScreen.ProductDetailsScreen.name}/${product.id}")
                             }
                         )
                     }
-                    composable(PriceWhisperScreen.ProductForm.name) {
+                    composable(PriceWhisperScreen.RegisterProductScreen.name) {
                         val viewModel = ProductViewModel()
                         ProductFormScreen(
                             onClickBtnSubmit = { product ->
@@ -138,7 +141,7 @@ fun PriceWhisperApp(
                             }
                         )
                     }
-                    composable("${PriceWhisperScreen.ProductDetails.name}/{productId}") {
+                    composable("${PriceWhisperScreen.ProductDetailsScreen.name}/{productId}") {
                         val viewModel = ProductViewModel()
                         val productId = it.arguments?.getString("productId")
 
@@ -157,7 +160,41 @@ fun PriceWhisperApp(
                             productState.value?.let { product ->
                                 ProductDetailsScreen(
                                     product = product,
-                                    onClickEditMode = {}
+                                    onClickEditMode = {
+                                        navController.navigate("${PriceWhisperScreen.EditProductScreen.name}/$productId")
+                                    }
+                                )
+                            } ?: run {
+                                Text("Carregando...")
+                            }
+                        }
+                    }
+                    composable("${PriceWhisperScreen.EditProductScreen.name}/{productId}") {
+                        val viewModel = ProductViewModel()
+                        val productId = it.arguments?.getString("productId")
+
+                        productId?.let { id ->
+                            val productState = remember { mutableStateOf<Product?>(null) }
+
+                            LaunchedEffect(productId) {
+                                viewModel.getById(
+                                    id = id,
+                                    onResult = { foundProduct ->
+                                        productState.value = foundProduct
+                                    }
+                                )
+                            }
+
+                            productState.value?.let { product ->
+                                ProductFormScreen(
+                                    filledProduct = product,
+                                    onClickBtnSubmit = { newProduct ->
+                                        viewModel.edit(
+                                            id = id,
+                                            newProduct = newProduct
+                                        )
+                                        navController.popBackStack()
+                                    }
                                 )
                             } ?: run {
                                 Text("Carregando...")

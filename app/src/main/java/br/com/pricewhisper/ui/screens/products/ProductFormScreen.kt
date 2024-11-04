@@ -16,12 +16,13 @@ import br.com.pricewhisper.ui.theme.PriceWhisperTheme
 @Composable
 fun ProductFormScreen(
     modifier: Modifier = Modifier,
+    filledProduct: Product = Product(),
     onClickBtnSubmit: (product: Product) -> Unit
 ) {
-    val name = remember { mutableStateOf("") }
-    val price = remember { mutableStateOf("") }
-    val stock = remember { mutableStateOf("") }
-    val description = remember { mutableStateOf("") }
+    val name = remember { mutableStateOf(filledProduct.name) }
+    val price = remember { mutableStateOf("${filledProduct.price}") }
+    val stock = remember { mutableStateOf("${filledProduct.stock}") }
+    val description = remember { mutableStateOf(filledProduct.description) }
 
     ProductForm(
         name = name,
@@ -43,7 +44,7 @@ private fun ProductFormPreview() {
                 .padding(16.dp)
         ) {
             ProductFormScreen(
-                onClickBtnSubmit = {}
+                onClickBtnSubmit = {},
             )
         }
     }
