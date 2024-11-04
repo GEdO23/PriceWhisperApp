@@ -51,7 +51,7 @@ class ProductViewModel : ViewModel() {
             )
         }
     }
-    
+
     fun save(
         product: Product
     ) {
@@ -66,6 +66,27 @@ class ProductViewModel : ViewModel() {
                 },
                 onRequestSuccess = { productSaved ->
                     Log.d("PRICE_WHISPER", "Product saved: $productSaved")
+                }
+            )
+        }
+    }
+
+    fun edit(
+        id: String,
+        newProduct: Product,
+    ) {
+        viewModelScope.launch {
+            repo.updateProductInFirebase(
+                id = id,
+                newProduct = newProduct,
+                onRequestFailure = { error ->
+                    Log.e(
+                        "PRICE_WHISPER",
+                        "EDIT PRODUCT FROM FIREBASE FAILED:\n${error.message}"
+                    )
+                },
+                onRequestSuccess = { product ->
+                    Log.d("PRICE_WHISPER", "Product Updated: $product")
                 }
             )
         }

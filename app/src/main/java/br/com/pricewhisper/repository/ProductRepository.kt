@@ -19,7 +19,7 @@ class ProductRepository : IProductRepository {
 
     override fun getProductListFromFirebase(
         onRequestSuccess: (products: HashMap<String, Product?>?) -> Unit,
-        onRequestFailure: (e: okio.IOException) -> Unit
+        onRequestFailure: (e: IOException) -> Unit
     ) {
         val request = Request.Builder()
             .url("$url/products.json")
@@ -50,7 +50,7 @@ class ProductRepository : IProductRepository {
     override fun getProductFromFirebaseById(
         id: String,
         onRequestSuccess: (productFound: Product?) -> Unit,
-        onRequestFailure: (e: okio.IOException) -> Unit
+        onRequestFailure: (e: IOException) -> Unit
     ) {
         val request = Request.Builder()
             .url("$url/products/$id.json")
@@ -83,7 +83,7 @@ class ProductRepository : IProductRepository {
     override fun postProductToFirebase(
         product: Product,
         onRequestSuccess: (productSaved: Product) -> Unit,
-        onRequestFailure: (e: okio.IOException) -> Unit
+        onRequestFailure: (e: IOException) -> Unit
     ) {
         val json = gson.toJson(product)
         val body = json.toRequestBody("application/json".toMediaType())
@@ -110,16 +110,43 @@ class ProductRepository : IProductRepository {
     override fun updateProductInFirebase(
         id: String,
         newProduct: Product,
-        onRequestSuccess: (oldProduct: Product, newProduct: Product) -> Unit,
-        onRequestFailure: (e: okio.IOException) -> Unit
+        onRequestSuccess: (newProduct: Product?) -> Unit,
+        onRequestFailure: (e: IOException) -> Unit
     ) {
-        TODO("Not yet implemented")
+        val json = gson.toJson(newProduct)
+        val body = json.toRequestBody("application/json".toMediaType())
+
+        val request = Request.Builder()
+            .url("$url/products/$id.json")
+            .put(body)
+            .build()
+
+        val response = object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                onRequestFailure(e)
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                response.use {
+                    if (!it.isSuccessful) {
+                        onRequestSuccess(null)
+                        return
+                    }
+                    val product: Product? =
+                        gson.fromJson(response.body?.string(), Product::class.java)
+                    onRequestSuccess(product)
+                }
+            }
+        }
+
+        httpClient.newCall(request)
+            .enqueue(response)
     }
 
     override fun deleteProductInFirebase(
         id: String,
         onRequestSuccess: (productDeleted: Product) -> Unit,
-        onRequestFailure: (e: okio.IOException) -> Unit
+        onRequestFailure: (e: IOException) -> Unit
     ) {
         TODO("Not yet implemented")
     }
