@@ -47,40 +47,7 @@ class ProductRepository : IProductRepository {
         httpClient.newCall(request)
             .enqueue(response)
     }
-
-    override fun getProductFromFirebaseById(
-        id: String,
-        onRequestSuccess: (productFound: Product?) -> Unit,
-        onRequestFailure: (e: IOException) -> Unit
-    ) {
-        val request = Request.Builder()
-            .url("$url/products/$id.json")
-            .get()
-            .build()
-
-        val response = object : Callback {
-            override fun onFailure(call: Call, e: IOException) {
-                onRequestFailure(e)
-            }
-
-            override fun onResponse(call: Call, response: Response) {
-                response.use {
-                    if (!it.isSuccessful) {
-                        onRequestSuccess(null)
-                        return
-                    }
-
-                    val product: Product? =
-                        gson.fromJson(response.body?.string(), Product::class.java)
-                    onRequestSuccess(product)
-                }
-            }
-        }
-
-        httpClient.newCall(request)
-            .enqueue(response)
-    }
-
+    
     override fun postProductToFirebase(
         product: Product,
         onRequestSuccess: (productSaved: Product) -> Unit,
