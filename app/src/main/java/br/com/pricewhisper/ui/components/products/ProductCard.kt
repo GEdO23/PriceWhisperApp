@@ -18,6 +18,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.datasource.LoremIpsum
 import androidx.compose.ui.unit.dp
+import br.com.pricewhisper.R
 import br.com.pricewhisper.models.Product
 import br.com.pricewhisper.ui.components.TextAndLabel
 import br.com.pricewhisper.ui.components.TextAndLabelStyle
@@ -105,7 +106,7 @@ private fun ProductCardBody(
                 primaryTextColor = style.primaryTextColor,
                 secondaryTextColor = style.secondaryTextColor
             ),
-            label = "Price:",
+            label = R.string.product_details_label_price,
             text = "R$ ${product.price}"
         )
         TextAndLabel(
@@ -115,7 +116,7 @@ private fun ProductCardBody(
                 primaryTextColor = style.primaryTextColor,
                 secondaryTextColor = style.secondaryTextColor
             ),
-            label = "Description:",
+            label = R.string.product_details_label_description,
             text = product.description
         )
         TextAndLabel(
@@ -125,7 +126,7 @@ private fun ProductCardBody(
                 primaryTextColor = style.primaryTextColor,
                 secondaryTextColor = style.secondaryTextColor
             ),
-            label = "Stock:",
+            label = R.string.product_details_label_stock,
             text = "${product.stock} em estoque"
         )
     }
