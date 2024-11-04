@@ -9,11 +9,17 @@ import br.com.pricewhisper.models.Product
 import br.com.pricewhisper.repository.ProductRepository
 import kotlinx.coroutines.launch
 
+/**
+ * ViewModel class for managing product-related operations.
+ */
 class ProductViewModel : ViewModel() {
     private val repo = ProductRepository()
     val productList = mutableStateListOf<Product>()
     val currentProduct = mutableStateOf<Product?>(null)
 
+    /**
+     * Loads the list of products from the repository.
+     */
     fun loadProducts() {
         viewModelScope.launch {
             repo.getProductListFromFirebase(
@@ -36,6 +42,11 @@ class ProductViewModel : ViewModel() {
         }
     }
 
+    /**
+     * Saves a new product to the repository.
+     *
+     * @param product The product to be saved.
+     */
     fun saveProduct(
         product: Product
     ) {
@@ -53,6 +64,12 @@ class ProductViewModel : ViewModel() {
         }
     }
 
+    /**
+     * Edits an existing product in the repository.
+     *
+     * @param id The ID of the product to be edited.
+     * @param newProduct The new product data.
+     */
     fun editProduct(
         id: String,
         newProduct: Product,
@@ -72,6 +89,12 @@ class ProductViewModel : ViewModel() {
         }
     }
 
+    /**
+     * Deletes a product from the repository.
+     *
+     * @param id The ID of the product to be deleted.
+     * @param onResult Callback function to be invoked with the deleted product.
+     */
     fun deleteProduct(
         id: String,
         onResult: (deletedProduct: Product?) -> Unit
