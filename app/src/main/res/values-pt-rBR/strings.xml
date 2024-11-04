@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="home_screen_title">Início</string>
+    <string name="product_list_screen_title">Lista de Produtos</string>
+    <string name="register_product_screen_title">Cadastrar Produto</string>
+    <string name="edit_product_screen_title">Editar Produto</string>
+    <string name="product_details_screen_title">Detalhes de Produto</string>
+</resources>
