@@ -52,7 +52,7 @@ interface IProductRepository {
     fun updateProductInFirebase(
         id: String,
         newProduct: Product,
-        onRequestSuccess: (oldProduct: Product, newProduct: Product) -> Unit,
+        onRequestSuccess: (newProduct: Product?) -> Unit,
         onRequestFailure: (e: IOException) -> Unit
     )
 

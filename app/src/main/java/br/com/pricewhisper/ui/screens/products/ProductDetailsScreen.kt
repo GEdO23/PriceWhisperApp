@@ -26,7 +26,7 @@ import java.math.BigDecimal
 fun ProductDetailsScreen(
     modifier: Modifier = Modifier,
     product: Product,
-    onClickEditMode: (product: Product) -> Unit
+    onClickEditMode: () -> Unit
 ) {
     Box(modifier = modifier) {
         Column(
@@ -41,7 +41,7 @@ fun ProductDetailsScreen(
             )
         }
         FloatingActionButton(
-            onClick = { onClickEditMode(product) },
+            onClick = { onClickEditMode() },
             containerColor = MaterialTheme.colorScheme.primaryContainer,
             modifier = Modifier
                 .align(alignment = Alignment.BottomEnd)
