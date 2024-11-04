@@ -18,4 +18,5 @@
     <string name="product_details_label_price">Price:</string>
     <string name="product_details_label_description">Description:</string>
     <string name="product_details_label_stock">Stock:</string>
+    <string name="productlist_item_icon_description_delete">Delete Product</string>
 </resources>

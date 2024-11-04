@@ -13,7 +13,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import br.com.pricewhisper.R
 import br.com.pricewhisper.models.Product
 import java.math.BigDecimal
 
@@ -57,7 +59,7 @@ private fun ProductListItem(
                     Icon(
                         imageVector = Icons.Outlined.Delete,
                         tint = MaterialTheme.colorScheme.onSurface,
-                        contentDescription = "Delete Product"
+                        contentDescription = stringResource(R.string.productlist_item_icon_description_delete)
                     )
 
                 }
