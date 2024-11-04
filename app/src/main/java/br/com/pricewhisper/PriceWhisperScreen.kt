@@ -119,8 +119,7 @@ fun PriceWhisperApp(
                 ) {
                     composable(PriceWhisperScreen.ProductListScreen.name) {
                         val viewModel = ProductViewModel()
-                        viewModel.getAll()
-
+                        
                         ProductListScreen(
                             productList = viewModel.productList,
                             onClickNewProductFAB = {
@@ -132,6 +131,12 @@ fun PriceWhisperApp(
                             },
                             onClickDelete = { productId ->
                                 Log.d("PRICE_WHISPER", "Product Deleted: $productId")
+                                viewModel.delete(
+                                    id = productId,
+                                    onResult = {
+                                        viewModel.getAll()
+                                    }
+                                )
                             }
                         )
                     }

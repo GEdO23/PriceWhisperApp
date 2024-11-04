@@ -1,5 +1,6 @@
 package br.com.pricewhisper.repository
 
+import android.util.Log
 import br.com.pricewhisper.models.Product
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
@@ -145,9 +146,30 @@ class ProductRepository : IProductRepository {
 
     override fun deleteProductInFirebase(
         id: String,
-        onRequestSuccess: (productDeleted: Product) -> Unit,
+        onRequestSuccess: (productDeleted: Product?) -> Unit,
         onRequestFailure: (e: IOException) -> Unit
     ) {
-        TODO("Not yet implemented")
+        val request = Request.Builder()
+            .url("$url/products/$id.json")
+            .delete()
+            .build()
+
+        val response = object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                onRequestFailure(e)
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                response.use {
+                    val localBody = it.body?.string()
+                    Log.d("PRICE_WHISPER", "LocalBody: $localBody")
+
+                    onRequestSuccess(null)
+                }
+            }
+        }
+
+        httpClient.newCall(request)
+            .enqueue(response)
     }
 }
