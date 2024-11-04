@@ -12,8 +12,10 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
+import br.com.pricewhisper.R
 import br.com.pricewhisper.models.Product
 import br.com.pricewhisper.ui.components.products.ProductList
 import br.com.pricewhisper.ui.theme.PriceWhisperTheme
@@ -42,7 +44,7 @@ fun ProductListScreen(
         ) {
             Icon(
                 imageVector = Icons.Filled.Add,
-                contentDescription = "Add new product"
+                contentDescription = stringResource(R.string.fab_new_product_icon_description)
             )
         }
     }
