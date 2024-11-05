@@ -21,4 +21,8 @@
     <string name="productlist_item_icon_description_delete">Deletar produto</string>
     <string name="top_app_bar_navigation_icon_description">Voltar</string>
     <string name="loading_text">Carregando…</string>
+    <string name="switch_theme_description">Alterar tema do Aplicativo</string>
+    <string name="actionbtn_products_description">Ir para tela de lista de produtos</string>
+    <string name="actionbtn_profile_description">Ir para perfil</string>
+    <string name="actionbtn_settings_description">Ir para ajustes</string>
 </resources>

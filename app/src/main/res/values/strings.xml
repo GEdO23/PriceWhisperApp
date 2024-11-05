@@ -22,4 +22,7 @@
     <string name="top_app_bar_navigation_icon_description">Go Back</string>
     <string name="loading_text">Loading…</string>
     <string name="switch_theme_description">Change App Theme</string>
+    <string name="actionbtn_products_description">Go To Product List Screen</string>
+    <string name="actionbtn_profile_description">Go To Profile</string>
+    <string name="actionbtn_settings_description">Go To Settings</string>
 </resources>
