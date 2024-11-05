@@ -25,4 +25,10 @@
     <string name="actionbtn_products_description">Go To Product List Screen</string>
     <string name="actionbtn_profile_description">Go To Profile</string>
     <string name="actionbtn_settings_description">Go To Settings</string>
+    <string name="settings_screen_title">Settings</string>
+    <string name="app_theme_light">Light mode</string>
+    <string name="app_theme_dark">Dark mode</string>
+    <string name="settings_topic_appearance_title">Appearance</string>
+    <string name="settings_topic_appearance_subtopic_appearance_title">Appearance</string>
+    <string name="settings_topic_appearance_subtopic_appearance_about">Customize the appearance of the application.</string>
 </resources>

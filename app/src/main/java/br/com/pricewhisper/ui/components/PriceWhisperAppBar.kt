@@ -3,7 +3,6 @@ package br.com.pricewhisper.ui.components
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
-import androidx.compose.material.icons.filled.Refresh
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -25,8 +24,7 @@ fun PriceWhisperAppBar(
     modifier: Modifier = Modifier,
     currentScreen: PriceWhisperScreen,
     canNavigateBack: Boolean = false,
-    navigateUp: () -> Unit = {},
-    onSwitchTheme: () -> Unit
+    navigateUp: () -> Unit = {}
 ) {
     TopAppBar(
         title = { Text(text = stringResource(currentScreen.title)) },
@@ -46,15 +44,6 @@ fun PriceWhisperAppBar(
                 }
             }
         },
-        actions = {
-            IconButton(onClick = onSwitchTheme) {
-                Icon(
-                    imageVector = Icons.Filled.Refresh,
-                    contentDescription = stringResource(R.string.switch_theme_description),
-                    tint = MaterialTheme.colorScheme.onPrimary
-                )
-            }
-        },
         modifier = modifier
     )
 }
@@ -66,7 +55,6 @@ private fun PriceWhisperAppBarPreview() {
 
     PriceWhisperAppBar(
         currentScreen = currentScreen,
-        canNavigateBack = false,
-        onSwitchTheme = {}
+        canNavigateBack = false
     )
 }
