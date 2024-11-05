@@ -25,4 +25,10 @@
     <string name="actionbtn_products_description">Ir para tela de lista de produtos</string>
     <string name="actionbtn_profile_description">Ir para perfil</string>
     <string name="actionbtn_settings_description">Ir para ajustes</string>
+    <string name="settings_topic_appearance_title">Aparência</string>
+    <string name="settings_topic_appearance_subtopic_appearance_title">Aparência</string>
+    <string name="settings_topic_appearance_subtopic_appearance_about">Personalize a aparência da aplicação.</string>
+    <string name="settings_screen_title">Ajustes</string>
+    <string name="app_theme_light">Modo claro</string>
+    <string name="app_theme_dark">Modo escuro</string>
 </resources>

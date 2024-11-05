@@ -28,6 +28,7 @@ import androidx.navigation.compose.rememberNavController
 import br.com.pricewhisper.models.Product
 import br.com.pricewhisper.ui.components.PriceWhisperAppBar
 import br.com.pricewhisper.ui.screens.HomeScreen
+import br.com.pricewhisper.ui.screens.SettingsScreen
 import br.com.pricewhisper.ui.screens.products.ProductDetailsScreen
 import br.com.pricewhisper.ui.screens.products.ProductFormScreen
 import br.com.pricewhisper.ui.screens.products.ProductListScreen
@@ -45,7 +46,8 @@ class MainActivity : ComponentActivity() {
         ProductListScreen(title = R.string.product_list_screen_title),
         RegisterProductScreen(title = R.string.register_product_screen_title),
         EditProductScreen(title = R.string.edit_product_screen_title),
-        ProductDetailsScreen(title = R.string.product_details_screen_title)
+        ProductDetailsScreen(title = R.string.product_details_screen_title),
+        SettingsScreen(title = R.string.settings_screen_title),
     }
 
     enum class PriceWhisperNavGraph {
@@ -89,8 +91,7 @@ class MainActivity : ComponentActivity() {
                 PriceWhisperAppBar(
                     currentScreen = currentScreen,
                     canNavigateBack = navController.previousBackStackEntry != null,
-                    navigateUp = { navController.navigateUp() },
-                    onSwitchTheme = { themeViewModel.value.switchPalette() }
+                    navigateUp = { navController.navigateUp() }
                 )
             }
         ) { innerPadding ->
@@ -109,11 +110,26 @@ class MainActivity : ComponentActivity() {
                             onClickProductsActionButton = {
                                 navController.navigate(PriceWhisperScreen.ProductListScreen.name)
                             },
-                            onClickProfileActionButton = {},
-                            onClickSettingsActionButton = {}
+                            onClickProfileActionButton = {
+                                navController.navigate(PriceWhisperScreen.SettingsScreen.name)
+                            },
+                            onClickSettingsActionButton = {
+                                navController.navigate(PriceWhisperScreen.SettingsScreen.name)
+                            }
                         )
                     }
-
+                    navigation(
+                        route = PriceWhisperNavGraph.Settings.name,
+                        startDestination = PriceWhisperScreen.SettingsScreen.name
+                    ) {
+                        composable(PriceWhisperScreen.SettingsScreen.name) {
+                            SettingsScreen(
+                                isDarkModeOn = themeViewModel.value.isDarkModeOn,
+                                onSwitchThemeToLightMode = { themeViewModel.value.switchToLightMode() },
+                                onSwitchThemeToDarkMode = { themeViewModel.value.switchToDarkMode() }
+                            )
+                        }
+                    }
                     navigation(
                         route = PriceWhisperNavGraph.Products.name,
                         startDestination = PriceWhisperScreen.ProductListScreen.name

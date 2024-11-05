@@ -33,10 +33,21 @@ class ThemeViewModel : ViewModel() {
     /**
      * Switches the palette mode and updates SharedPreferences.
      */
-    fun switchPalette() {
+    fun switchToLightMode() {
         currentPrefs.value
             ?.edit()
-            ?.putBoolean(SHARED_PREFS_PALETTE_KEY, !isDarkModeOn.value)
+            ?.putBoolean(SHARED_PREFS_PALETTE_KEY, false)
+            ?.apply()
+        isDarkModeOn.value = getCurrentPalette()
+    }
+    
+    /**
+     * Switches the palette mode and updates SharedPreferences.
+     */
+    fun switchToDarkMode() {
+        currentPrefs.value
+            ?.edit()
+            ?.putBoolean(SHARED_PREFS_PALETTE_KEY, true)
             ?.apply()
         isDarkModeOn.value = getCurrentPalette()
     }
